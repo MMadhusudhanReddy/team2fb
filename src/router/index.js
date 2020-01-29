@@ -1,23 +1,41 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import landing from '../views/landing.vue'
+import MyProfile from '../views/MyProfile.vue'
+import CommonRegister from '../views/CommonRegister.vue'
+import FbLogin from '../views/FbLogin.vue'
+import Register2 from '../views/Register2.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path: '/landing',
+    name: 'landing',
+    component: landing
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/myprofile',
+    name: 'myprofile of user',
+    component: MyProfile
+  },
+  {
+    path: '/commonregister',
+    name: 'common register',
+    component: CommonRegister
+  },
+  {
+    path: '/fblogin',
+    name: 'fb login',
+    component: FbLogin
+  },
+  {
+    path: '/register',
+    name: 'fb Registration',
+    component: Register2
+  },
+  
 ]
 
 const router = new VueRouter({
