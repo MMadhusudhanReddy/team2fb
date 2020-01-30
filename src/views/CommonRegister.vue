@@ -17,7 +17,7 @@
             <label>PASSWORD:</label>
             <input type="number" placeholder="PASSWORD" v-model="password" required/><br><br>
         </div>
-        <button v-on:click="register" > </button>
+        <button v-on:click.prevent="register" > </button>
         <!-- <router-link to="/Register"><button>CONTINUE</button></router-link> -->
         </div>
       </form>
@@ -25,6 +25,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -36,28 +37,20 @@ export default {
     };
   },
   methods:{
-        login(){
-          this.$store.dispatch('usercommonregistration',{
-            username:this.username,
-            emailId:this.emailId,
-            password:this.password,
-          })
-          // eslint-disable-next-line no-unused-vars
-          .then(response => {
-            this.console.log('response',  response)
-            this.$router.push('/merchant/'+response.data.id+'/myproducts')
-          })
-          .catch(error => {
-            window.console.log(error.response)
-            if (error.response.status == 500) {
-              this.errors.push("We couldn't verify your account details.");
-            } else {
-              this.errors.push("Something went wrong, please refresh and try again.");
-            }
-          });
-        }
+        register(){
+          window.console.log("inside register")
+            axios.post('http://172.16.20.32:8080/auth/signup',{
+            name:this.username,
+            email :this.email,
+            password:this.password
+      })
+      .then(response=>{
+        window.console.log('response',response)
+      })
+
   }
-};
+}
+}
 </script>
 <style scoped>
 .inputfield{

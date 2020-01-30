@@ -6,6 +6,7 @@ import CommonRegister from '../views/CommonRegister.vue'
 import FbLogin from '../views/FbLogin.vue'
 import Register2 from '../views/Register2.vue'
 import BusinessLanding from '../views/Business/BusinessLanding.vue'
+import Timeline from '../views/Timeline.vue'
 
 
 Vue.use(VueRouter)
@@ -17,7 +18,7 @@ const routes = [
     component: landing
   },
   {
-    path: '/myprofile',
+    path: '/myprofile/:userId',
     name: 'myprofile of user',
     component: MyProfile
   },
@@ -40,6 +41,11 @@ const routes = [
     path: '/businesslanding',
     name: 'Business Landing',
     component: BusinessLanding
+  },
+  {
+    path: '/timeline',
+    name: 'Timeline',
+    component: Timeline
   },
   
 ]

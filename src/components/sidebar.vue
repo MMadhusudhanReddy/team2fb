@@ -10,6 +10,9 @@
         <div class="sidebar">
            <u> Friends </u>
         </div>
+        <div v-on:click="about" class="sidebar">
+           <u> About </u>
+        </div>
         <!-- <div class="sidebarbuttons">
             <b-button>My Profile</b-button>
             <i class="fas fa-user" style="font-size:30px;color:white;margin-left:3%;"></i>
@@ -23,6 +26,16 @@
 
     </div>
 </template>
+
+<script>
+export default {
+    methods:{
+        about(){
+            this.$router.push("/myprofile/"+localStorage.getItem('userId')+"")
+        }
+    }
+}
+</script>
 
 <style scoped>
 .sidebarbuttons{

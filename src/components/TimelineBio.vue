@@ -27,9 +27,7 @@ export default {
     box-shadow: 4px 3px 2px 3px  black;
     height:150px;
     width:100%;
-    position:absolute;
-    top:0;
-    left:0;
+    margin-bottom: 1%;
 }
 .left{
     float:left;

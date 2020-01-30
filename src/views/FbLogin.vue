@@ -13,7 +13,7 @@
     </label>
      <input type="password" placeholder="PASSWORD" v-model="Password" required><br><br>
      <div class="buttonsclass">
-        <button>LOGIN</button>
+        <button v-on:click.prevent="login">LOGIN</button>
         <button>Register</button>
      </div>
      <!-- <a href="#">
@@ -23,13 +23,27 @@
 </div>
 </template>
 <script>
+
 export default {
   data(){
     return{
       Username:'',
       Password:''
     }
-  }
+  },
+  methods:{
+        login(){
+          this.$store.dispatch('userfblogin',{
+            email:this.Username,
+            password:this.Password,
+          })
+          // eslint-disable-next-line no-unused-vars
+          .then(response => {
+            window.console.log('response',  response)
+          })
+         
+      }
+}
 }
 </script>
 <style scoped>
@@ -61,7 +75,7 @@ button{
 }
 .buttonsclass{
     display: flex;
-    
+
 }
 label{
   padding:30px;
