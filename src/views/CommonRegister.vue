@@ -6,7 +6,7 @@
           <div>
         <div class="inputfield">
             <label>NAME:</label>
-            <input type="text" placeholder="NAME" v-model="firstname"
+            <input type="text" placeholder="NAME" v-model="username"
             required/><br><br>
         </div>
         <div class="inputfield">
@@ -15,9 +15,10 @@
         </div>
         <div class="inputfield">
             <label>PASSWORD:</label>
-            <input type="number" placeholder="PASSWORD" v-model="email" required/><br><br>
+            <input type="number" placeholder="PASSWORD" v-model="password" required/><br><br>
         </div>
-        <router-link to="/Register"><button>CONTINUE</button></router-link>
+        <button v-on:click="register" > </button>
+        <!-- <router-link to="/Register"><button>CONTINUE</button></router-link> -->
         </div>
       </form>
     </div>
@@ -27,19 +28,35 @@
 export default {
   data() {
     return {
-      firstname:'',
-      lastname:'',
+      username:'',
       email:'',
-      password:'',
-      confirmpassword:'',
-      date:'',
+      password:''
+
+      
     };
   },
   methods:{
-    disable:function(){
-      return document.getElementById('typed').options[1].disabled= true;
-    }
-   }
+        login(){
+          this.$store.dispatch('usercommonregistration',{
+            username:this.username,
+            emailId:this.emailId,
+            password:this.password,
+          })
+          // eslint-disable-next-line no-unused-vars
+          .then(response => {
+            this.console.log('response',  response)
+            this.$router.push('/merchant/'+response.data.id+'/myproducts')
+          })
+          .catch(error => {
+            window.console.log(error.response)
+            if (error.response.status == 500) {
+              this.errors.push("We couldn't verify your account details.");
+            } else {
+              this.errors.push("Something went wrong, please refresh and try again.");
+            }
+          });
+        }
+  }
 };
 </script>
 <style scoped>

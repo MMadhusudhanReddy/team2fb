@@ -32,6 +32,7 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 1%;
 }
 .search-bar {
   margin-top: 11px;

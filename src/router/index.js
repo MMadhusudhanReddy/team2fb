@@ -5,6 +5,7 @@ import MyProfile from '../views/MyProfile.vue'
 import CommonRegister from '../views/CommonRegister.vue'
 import FbLogin from '../views/FbLogin.vue'
 import Register2 from '../views/Register2.vue'
+import BusinessLanding from '../views/Business/BusinessLanding.vue'
 
 
 Vue.use(VueRouter)
@@ -34,6 +35,11 @@ const routes = [
     path: '/register',
     name: 'fb Registration',
     component: Register2
+  },
+  {
+    path: '/businesslanding',
+    name: 'Business Landing',
+    component: BusinessLanding
   },
   
 ]

@@ -30,16 +30,16 @@
         </div>
         <div class="inputfield">
         <label>ROLE</label>
-        <select @click="disable()">
-          <option selected>USER</option>
-          <option>BUSINESS</option>
+        <select @change="disable($event)">
+          <option selected value="user">USER</option>
+          <option value="business" >BUSINESS </option>
         </select><br><br>
         </div>
         <div class="inputfield">
         <label>PROFILE TYPE</label>
         <select id="typed">
-          <option selected>PUBLIC</option>
-          <option>PRIVATE</option>
+          <option selected value="public">PUBLIC</option>
+          <option v-if="seen" value="private">PRIVATE</option>
         </select><br><br>
         </div>
         <div class="inputfield">
@@ -68,13 +68,19 @@ export default {
       password:'',
       confirmpassword:'',
       date:'',
+      seen:true
     };
   },
   methods:{
-    disable:function(){
-      return document.getElementById('typed').options[1].disabled= true;
-    }
+    disable(){
+        this.seen=!this.seen
+        window.console.log("inside disable function")
+        // this.seen=false
+
+        
+      
    }
+  }
 };
 </script>
 <style scoped>
