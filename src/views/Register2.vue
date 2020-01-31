@@ -19,7 +19,7 @@
         </div>
         <div class="inputfield">
           <label >GENDER</label>
-          <select v-model="gender">
+          <select v-model="gender"  >
             <option value="male">MALE</option>
             <option value="female">FEMALE</option>
           </select>
@@ -30,7 +30,7 @@
         </div>
         <div class="inputfield">
         <label>ROLE</label>
-        <select v-bind="select" @change="disable($event)">
+        <select v-model="selected" @change="disable($event)">
           <option selected value="user">USER</option>
           <option value="business" >BUSINESS </option>
         </select><br><br>
@@ -70,33 +70,43 @@ export default {
       confirmpassword:'',
       date:'',
       seen:true,
-      select:'',
+      selected:'user',
       contactnumber:null,
       selectedvalue:'',
-      gender:'',
+      gender:'male',
       interest:'',
-      profiletype:''
+      profiletype:'public'
 
     };
   },
   methods:{
     disable(event){
         this.seen=!this.seen
-        window.console.log(event.target.value)
+        // this.selected=event.target.value
+        window.console.log(this.selected)
+        window.console.log("gender",this.gender)
         this.selectedvalue=event.target.value
 
         window.console.log("inside disable function")
         // this.seen=false   
    },
    register(){
-     window.console.log(this.selectedvalue)
+     window.console.log(this.selected)
+     window.console.log("userName",this.name)
+          window.console.log("gender",this.gender)
+          window.console.log("email",this.email)
+          window.console.log("DOB",this.date)
+          window.console.log("mobileNumber",this.contactnumber)
+          window.console.log("interests",this.interest)
+          window.console.log("profileType",this.selected)
+          window.console.log("displayType",this.profiletype)
         window.console.log("inside second register page")
       // window.console.log("fblogin  ",credentials)  
       //to paras
         axios.post('http://172.16.20.32:8080/role/updateRole',
         {
           "channel_channel_id" :1,
-          "role" : this.selectedvalue
+          "role" : this.selected
 
         },{ headers:{"authorization":localStorage.getItem('accessToken')}})
         .then(response=>{
@@ -110,19 +120,20 @@ export default {
       })
 
       //to vanik
-       axios.post('http://10.177.68.178.:8082/user/editDetails',
+       axios.post('http://172.16.20.180:8082/user/editDetails',
         {
           "userName":this.name,
-          "gender":this.gender.value,
+          "gender":this.gender,
           "email":this.email,
           "DOB":this.date,
           "mobileNumber":this.contactnumber,
-          "interests":this.interest.value,
-          "profileType":this.select.value,
+          "interests":[this.interest],
+          "profileType":this.selected,
           "displayType":this.profiletype
         },{ headers:{"Auth":localStorage.getItem('accessToken')}})
         .then(response=>{
-          window.console.log('response',response)
+          window.console.log('response',response.data.data.userId)
+          localStorage.setItem('userId',response.data.data.userId)
           
           
         })
@@ -130,6 +141,7 @@ export default {
       .catch(error => {
         window.console.log(error)
       })
+      this.$router.push('/landing')
 
     },
 
@@ -144,7 +156,7 @@ export default {
 h1 {
   margin: 0 auto;
   background-color: #3B5998;
-  width: 680px;
+  width: 48.3%;
   color: white;
 }
 .register {

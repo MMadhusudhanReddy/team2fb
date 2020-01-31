@@ -5,16 +5,16 @@
   <div class="login">
    <form>
      <label>
-    USER NAME:
+      E-mail:   
      </label>
-    <input type="text" placeholder="USERNAME/EMAIL" v-model="Username" required><br><br>
+    <input  type="text" placeholder="USERNAME/EMAIL" v-model="Username" required><br><br>
     <label>
      PASSWORD:
     </label>
      <input type="password" placeholder="PASSWORD" v-model="Password" required><br><br>
      <div class="buttonsclass">
         <button v-on:click.prevent="login">LOGIN</button>
-        <button>Register</button>
+        <button v-on:click="register">Register</button>
      </div>
      <!-- <a href="#">
        <router-link to="/Register">REGISTER</router-link></a> -->
@@ -51,10 +51,8 @@ export default {
         window.console.log("inside login page")
       // window.console.log("fblogin  ",credentials)
       axios.post('http://172.16.20.32:8080/auth/signin',{
-        
         email :this.Username,
         password:this.Password,
-        
       })
       .then(response=>{
         window.console.log('response',response)
@@ -87,6 +85,10 @@ export default {
       })
 
     },
+    register()
+    {
+      this.$router.push('/commonregister')
+    }
 
 
 
@@ -104,7 +106,7 @@ export default {
 h1{
   margin:0 auto;
   background-color:#3b5998;
-  width:40.5%;
+  width: 40.3%;
   color:white;
 }
 .login{

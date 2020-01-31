@@ -13,7 +13,8 @@ export default new Vuex.Store({
     searchdetails:[],
     postreaction:null,
     feed:[],
-    timelinefeeds:[]
+    timelinefeeds:[],
+    index:null
   },
   mutations: {
     UPDATE_TIMELINE_FEED_DETAILS(state,data)
@@ -40,10 +41,10 @@ export default new Vuex.Store({
   actions: {
     getFeedTimeline(context, userId) {
       // window.console.log('in store, getproductdetails ', this.state)
-      axios.get('http://10.177.68.182:8083/post/user/timeline/' + userId)
+      axios.get('http://172.16.20.82:8083/post/user/timeline/' + userId)
         .then(product => {
-          window.console.log("inside get feed timeline",product.data.data)
-          context.commit('UPDATE_TIMELINE_FEED_DETAILS', product.data.data)
+          window.console.log("inside get feed timeline",product.data)
+          context.commit('UPDATE_TIMELINE_FEED_DETAILS', product.data)
         })
         .catch(error => {
           window.console.log(error)
@@ -51,7 +52,7 @@ export default new Vuex.Store({
     },
     getFeeds(context, userId) {
       // window.console.log('in store, getproductdetails ', this.state)
-      axios.get('http://10.177.69.66:8084/feed/getFeed/' + userId)
+      axios.get('http://172.16.20.113:8084/feed/getFeed/' + userId)
         .then(product => {
           window.console.log(product.data.postDTOList)
           context.commit('UPDATE_FEED_DETAILS', product.data.postDTOList)
@@ -61,12 +62,12 @@ export default new Vuex.Store({
         })
     },
     sendPostReaction(){
-      axios.post('http://10.177.68.182:8083/reaction/addActivity',
+      axios.post('http://172.16.20.82:8083/reaction/addActivity',
       {
-        "userId":1,
-        // "userId":localStorage.getItem('userId'),
-        "postid":1,
-        "category":"personal"
+        // "userId":1,
+        "userId":localStorage.getItem('userId'),
+        "postid":this.state.feed[this.state.index].postId,
+        "activity":this.state.postreaction
 
 
       }).then(response => {
@@ -119,7 +120,7 @@ export default new Vuex.Store({
     },
     getSearchResults(context,searchText)
     {
-      axios.get('http://10.177.69.55:8085/search/getAll/'+searchText)
+      axios.get('http://172.16.20.138:8085/search/getAll/'+searchText)
       .then(product => {
         window.console.log(product.data)
         context.commit('UPDATE_SEARCH_DETAILS', product.data)

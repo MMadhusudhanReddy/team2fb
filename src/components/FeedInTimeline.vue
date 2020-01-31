@@ -4,35 +4,35 @@
             <div class="singlepost">
                 <!-- {{index}} -->
                 <!-- {{order.content.text}} -->
-                <div v-if="order.postDTO.content.image!=null">
-                    <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
+                <div v-if="order.content.image!=null">
+                    <img v-bind:src="order.content.image" style="width:100%;height:280px;"><br>
                 </div>
-                <div v-if="order.postDTO.content.video!=null">
+                <div v-if="order.content.video!=null">
                     <video style="width:100%;" autoplay>
-                        <source v-bind:src="order.postDTO.content.video" type="video/mp4">
+                        <source v-bind:src="order.content.video" type="video/mp4">
                         <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
                         This video is not supported by the browser
                     </video> 
                 </div>
-                <div v-if="order.postDTO.content.text!=null">
+                <div v-if="order.content.text!=null">
                   <div style="width:100%">
-                    <p style="width:100%">{{order.postDTO.content.text}}   </p>  
+                    <p style="width:100%">{{order.content.text}}   </p>  
                   </div>
                 </div>
                 <div class="bottomsection">
-                    <div v-on:click=postreation(like)>
+                    <div v-on:click="postreaction(index)" >
                         <i class="far fa-thumbs-up"></i>
                         Like
                     </div>
-                    <div v-on:click=postreation(dislike)>
+                    <div v-on:click="postreaction1(index)" >
                         <i class="far fa-thumbs-down"></i>
                         Dislike
                     </div>
-                    <div v-on:click=postreation(wow)>
+                    <div v-on:click="postreaction2(index)" >
                         <i class="far fa-surprise"></i>
                         wow
                     </div>
-                    <div v-on:click=postreation(angry)>
+                    <div v-on:click="postreaction3(index)" >
                         <i class="far fa-angry"></i>
                         Angry
                     </div>
@@ -117,7 +117,7 @@ export default {
         }
     },
     created(){
-      this.$store.dispatch("getFeeds",localStorage.getItem('userId'))
+      this.$store.dispatch("getFeedTimeline",localStorage.getItem('userId'))
       // this.$store.dispatch("/getFeeds/"+)
       
 
@@ -126,15 +126,41 @@ export default {
       feeds(){
         window.console.log("inside feed",this.$store.state.timelinefeeds)
         return this.$store.state.timelinefeeds
-      }
+      },
+      
 
     },
     methods:{
-      postreaction(value){
-        this.$store.state.postreaction=value
+        postreaction(index){
+        this.$store.state.postreaction="like"
+        window.console.log("reaction",this.$store.state.postreaction)
+        window.console.log(index)
+        this.$store.state.index=index
+        this.$store.dispatch('sendPostReaction')
+
+      },
+      postreaction1(index){
+        this.$store.state.postreaction="dislike"
+        window.console.log("reaction",this.$store.state.postreaction)
+        window.console.log(index)
+        this.$store.dispatch('sendPostReaction')
+
+      },
+      postreaction2(index){
+        this.$store.state.postreaction="wow"
+        window.console.log("reaction",this.$store.state.postreaction)
+        window.console.log(index)
+        this.$store.dispatch('sendPostReaction')
+
+      },
+      postreaction3(index){
+        this.$store.state.postreaction="angry"
+        window.console.log("reaction",this.$store.state.postreaction)
+        window.console.log(index)
         this.$store.dispatch('sendPostReaction')
 
       }
+      
     }
 }
 </script>
