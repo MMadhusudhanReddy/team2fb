@@ -24,6 +24,8 @@
 </template>
 <script>
 
+import axios from "axios";
+
 export default {
   data(){
     return{
@@ -32,17 +34,69 @@ export default {
     }
   },
   methods:{
-        login(){
-          this.$store.dispatch('userfblogin',{
-            email:this.Username,
-            password:this.Password,
-          })
-          // eslint-disable-next-line no-unused-vars
-          .then(response => {
-            window.console.log('response in login page',  response)
-          })
+      //   login(){
+      //     this.$store.dispatch('userfblogin',{
+      //       email:this.Username,
+      //       password:this.Password,
+      //     })
+      //     // eslint-disable-next-line no-unused-vars
+      //     .then(response => {
+      //       window.console.log('response in login page',  response)
+      //     })
          
-      }
+      // }
+
+
+      login(){
+        window.console.log("inside login page")
+      // window.console.log("fblogin  ",credentials)
+      axios.post('http://172.16.20.32:8080/auth/signin',{
+        
+        email :this.Username,
+        password:this.Password,
+        
+      })
+      .then(response=>{
+        window.console.log('response',response)
+        window.console.log("inside second response")
+        this.$store.state.accesstoken="Bearer "+response.data.accessToken
+        axios.post('http://172.16.20.32:8080/jwt/getUserDetails',
+        {
+          "provider": 2
+
+        },{ headers:{"authorization":this.$store.state.accesstoken}})
+        .then(response=>{
+          window.console.log('second response',response)
+          localStorage.setItem('Loginid',response.data.id)
+          localStorage.setItem('accessToken',this.$store.state.accesstoken)
+          if(response.data.role==null)
+          {
+            this.$router.push('/register')
+          }
+          else{
+            this.$router.push('/landing')
+
+          }
+          
+        })
+
+
+      })
+      .catch(error => {
+        window.console.log(error)
+      })
+
+    },
+
+
+
+
+
+
+
+
+
+
 }
 }
 </script>

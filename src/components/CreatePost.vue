@@ -53,6 +53,8 @@ export default {
         storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.picture =url;
           window.console.log(this.picture)
+          this.$store.state.uploadimageurl=this.picture
+          this.$store.dispatch('sendPostDetails')
         });
       }
       );

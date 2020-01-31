@@ -2,11 +2,13 @@
     <div class="header">
         <div class="headercomponents">
             <i class="fab fa-facebook-square" style="font-size: 50px;color:white;margin-left:3%;"></i>
-            <div class="home">
+            <div v-on:click="home" class="home">
                 Home
             </div>
             <div class="search">
-                <input type="text" style="height:50%;margin:auto;border-radius:10px;width:100%;text-align:center;font-size:15px;" placeholder="search">
+                
+                <input v-on:keyup.enter="search"
+          v-model="searchText" type="text" style="height:50%;margin:auto;border-radius:10px;width:100%;text-align:center;font-size:15px;" placeholder="search">
             </div>
             <!-- <div class="profile">
                 <i class="fas fa-user" style="font-size:30px;color:white;margin-left:3%;"></i>
@@ -23,6 +25,40 @@
             
     </div>
 </template>
+<script>
+export default {
+    data() {
+    return {
+      searchText: ""
+    };
+  },
+
+ methods: {
+    home(){
+        this.$router.push('/landing')
+
+     },
+    search() {
+        this.$store.dispatch("getSearchResults", this.searchText);
+        this.$router.push('/search')
+
+
+    //   if (this.$route.path.match("searchresults")) {
+    //     this.$store.dispatch("getResults", this.searchText);
+    //     this.$router.push("/searchresults");
+    //   } else {
+    //     if (e.keyCode === 13) {
+    //       this.$store.dispatch("getResults", this.searchText);
+    //       this.$router.push("/searchresults");
+    //     }
+    //   }
+      // window.console.log('route',this.$route);
+      // this.$store.dispatch('getResults',this.searchText);
+      // this.$router.push('/searchresults');
+    },
+ }
+}
+ </script>
 
 <style scoped>
 .header{

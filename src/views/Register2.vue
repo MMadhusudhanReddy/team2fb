@@ -6,7 +6,7 @@
           <div>
         <div class="inputfield">
             <label>NAME:</label>
-            <input type="text" placeholder="NAME" v-model="firstname"
+            <input type="text" placeholder="NAME" v-model="name"
             required/><br><br>
         </div>
         <div class="inputfield">
@@ -15,13 +15,13 @@
         </div>
         <div class="inputfield">
             <label>MOBILE NUMBER</label>
-            <input type="number" placeholder="CONTACT" v-model="email" required/><br><br>
+            <input type="number" placeholder="CONTACT" v-model="contactnumber" required/><br><br>
         </div>
         <div class="inputfield">
-          <label>GENDER</label>
-          <select>
-            <option>MALE</option>
-            <option>FEMALE</option>
+          <label >GENDER</label>
+          <select v-model="gender">
+            <option value="male">MALE</option>
+            <option value="female">FEMALE</option>
           </select>
         </div>
         <div class="inputfield">
@@ -30,56 +30,110 @@
         </div>
         <div class="inputfield">
         <label>ROLE</label>
-        <select @change="disable($event)">
+        <select v-bind="select" @change="disable($event)">
           <option selected value="user">USER</option>
           <option value="business" >BUSINESS </option>
         </select><br><br>
         </div>
         <div class="inputfield">
         <label>PROFILE TYPE</label>
-        <select id="typed">
+        <select v-model="profiletype" id="typed">
           <option selected value="public">PUBLIC</option>
           <option v-if="seen" value="private">PRIVATE</option>
         </select><br><br>
         </div>
         <div class="inputfield">
         <label>INTERESTS</label>
-        <select>
-          <option selected>SPORTS</option>
-          <option>BOLLYWOOD</option>
-          <option>LIFE STYLE</option>
-          <option>TECHNOLOGY</option>
-          <option>FOOD</option>
+        <select v-model="interest">
+          <option value="sports" selected>SPORTS</option>
+          <option value="bollywood">BOLLYWOOD</option>
+          <option value="lifestyle">LIFE STYLE</option>
+          <option value="technology">TECHNOLOGY</option>
+          <option value="food">FOOD</option>
         </select>
         </div>
-        <button>REGISTER</button>
+        <button v-on:click.prevent="register">REGISTER</button>
         </div>
       </form>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      firstname:'',
+      name:'',
       lastname:'',
       email:'',
       password:'',
       confirmpassword:'',
       date:'',
-      seen:true
+      seen:true,
+      select:'',
+      contactnumber:null,
+      selectedvalue:'',
+      gender:'',
+      interest:'',
+      profiletype:''
+
     };
   },
   methods:{
-    disable(){
+    disable(event){
         this.seen=!this.seen
-        window.console.log("inside disable function")
-        // this.seen=false
+        window.console.log(event.target.value)
+        this.selectedvalue=event.target.value
 
-        
-      
-   }
+        window.console.log("inside disable function")
+        // this.seen=false   
+   },
+   register(){
+     window.console.log(this.selectedvalue)
+        window.console.log("inside second register page")
+      // window.console.log("fblogin  ",credentials)  
+      //to paras
+        axios.post('http://172.16.20.32:8080/role/updateRole',
+        {
+          "channel_channel_id" :1,
+          "role" : this.selectedvalue
+
+        },{ headers:{"authorization":localStorage.getItem('accessToken')}})
+        .then(response=>{
+          window.console.log('response',response)
+          
+          
+        })
+
+      .catch(error => {
+        window.console.log(error)
+      })
+
+      //to vanik
+       axios.post('http://10.177.68.178.:8082/user/editDetails',
+        {
+          "userName":this.name,
+          "gender":this.gender.value,
+          "email":this.email,
+          "DOB":this.date,
+          "mobileNumber":this.contactnumber,
+          "interests":this.interest.value,
+          "profileType":this.select.value,
+          "displayType":this.profiletype
+        },{ headers:{"Auth":localStorage.getItem('accessToken')}})
+        .then(response=>{
+          window.console.log('response',response)
+          
+          
+        })
+
+      .catch(error => {
+        window.console.log(error)
+      })
+
+    },
+
+
   }
 };
 </script>

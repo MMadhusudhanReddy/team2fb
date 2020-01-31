@@ -7,7 +7,9 @@ import FbLogin from '../views/FbLogin.vue'
 import Register2 from '../views/Register2.vue'
 import BusinessLanding from '../views/Business/BusinessLanding.vue'
 import Timeline from '../views/Timeline.vue'
+import search from '../views/search.vue'
 import Friends from '../views/Friends.vue'
+
 
 Vue.use(VueRouter)
 
@@ -48,8 +50,13 @@ const routes = [
     component: Timeline
   },
   {
+    path: '/search',
+    name: 'search',
+    component: search
+  },
+  {
     path: '/friends',
-    name: 'Friends',
+    name: 'friends',
     component: Friends
   },
   

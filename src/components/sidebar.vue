@@ -4,10 +4,10 @@
         <div class="sidebar">
             <u>My Profile</u>
         </div>
-        <div class="sidebar">
+        <div v-on:click="timeline" class="sidebar">
             <u>Timeline </u>
         </div>
-        <div class="sidebar">
+        <div v-on:click="friends" class="sidebar">
            <u> Friends </u>
         </div>
         <div v-on:click="about" class="sidebar">
@@ -32,6 +32,12 @@ export default {
     methods:{
         about(){
             this.$router.push("/myprofile/"+localStorage.getItem('userId')+"")
+        },
+        friends(){
+            this.$router.push("/friends")
+        },
+        timeline(){
+            this.$router.push("/timeline")
         }
     }
 }

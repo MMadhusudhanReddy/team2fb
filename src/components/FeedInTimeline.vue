@@ -4,19 +4,19 @@
             <div class="singlepost">
                 <!-- {{index}} -->
                 <!-- {{order.content.text}} -->
-                <div v-if="order.content.image!=null">
-                    <img v-bind:src="order.content.image" style="width:100%;height:280px;"><br>
+                <div v-if="order.postDTO.content.image!=null">
+                    <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
                 </div>
-                <div v-if="order.content.video!=null">
+                <div v-if="order.postDTO.content.video!=null">
                     <video style="width:100%;" autoplay>
-                        <source v-bind:src="order.content.video" type="video/mp4">
+                        <source v-bind:src="order.postDTO.content.video" type="video/mp4">
                         <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
                         This video is not supported by the browser
                     </video> 
                 </div>
-                <div v-if="order.content.text!=null">
+                <div v-if="order.postDTO.content.text!=null">
                   <div style="width:100%">
-                    <p style="width:100%">{{order.content.text}}   </p>  
+                    <p style="width:100%">{{order.postDTO.content.text}}   </p>  
                   </div>
                 </div>
                 <div class="bottomsection">
@@ -124,8 +124,8 @@ export default {
     },
     computed:{
       feeds(){
-        window.console.log("inside feed",this.$store.state.feed)
-        return this.$store.state.feed
+        window.console.log("inside feed",this.$store.state.timelinefeeds)
+        return this.$store.state.timelinefeeds
       }
 
     },

@@ -17,7 +17,7 @@
             <label>PASSWORD:</label>
             <input type="number" placeholder="PASSWORD" v-model="password" required/><br><br>
         </div>
-        <button v-on:click.prevent="register" > </button>
+        <button v-on:click.prevent="register" > Register</button>
         <!-- <router-link to="/Register"><button>CONTINUE</button></router-link> -->
         </div>
       </form>
@@ -40,6 +40,14 @@ export default {
         register(){
           window.console.log("inside register")
             axios.post('http://172.16.20.32:8080/auth/signup',{
+            name:this.username,
+            email :this.email,
+            password:this.password
+      })
+      .then(response=>{
+        window.console.log('response',response)
+      })
+      axios.post('http://172.16.:8082/auth/signup',{
             name:this.username,
             email :this.email,
             password:this.password

@@ -1,10 +1,10 @@
 <template>
     <div class="Timelinebio">
       <div class="left">
-          <img :src="image"  alt="image" height="150" width="150">
+          <img :src="bio.imageUrl"  alt="image" height="150" width="150">
       </div>
       <div class="right">
-          <p>NAME : {{NAME}}</p>
+          <p>NAME : {{bio.userName}}</p>
           <p>DOB:{{DOB}}</p>
       </div>
     </div>
@@ -18,8 +18,14 @@ export default {
         DOB:'10/03/1998'
         }
     },
-    methods:{
-    }
+    computed:{
+      bio(){
+        window.console.log("inside timeline bio",this.$store.state.timelinefeeds[0])
+        return this.$store.state.timelinefeeds[0]
+      }
+
+    },
+    
 }
 </script>
 <style scoped>

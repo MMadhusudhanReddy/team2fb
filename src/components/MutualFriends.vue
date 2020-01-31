@@ -1,14 +1,14 @@
 <template>
   <div class="Friends">
       <div class="mutualfriendsheading">Friends</div>
-    <div v-for="items in profiles" :key="items">
+    <div v-for="items in friends" :key="items">
       <table>
         <tr>
           <td>
-            <img v-bind:src="items.image" class="image" />
+            <img v-bind:src="items.imageUrl" class="image" />
           </td>
           <td>&nbsp;&nbsp;&nbsp;
-              {{items.name}}
+              {{items.userName}}
           </td>
         </tr>
       </table>
@@ -56,7 +56,13 @@ export default {
           name: "ANSH"
         }
       ]
-    };
+    }
+  },
+  computed:{
+      friends(){
+          return this.$store.state.searchdetails
+      }
+
   }
 };
 </script>

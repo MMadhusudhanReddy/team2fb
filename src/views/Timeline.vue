@@ -11,7 +11,7 @@
                     <sidebar/>
             </div>
             <div class="feeds">
-                    <feed/>
+                    <FeedInTimeline/>
             </div>
             <div class="ads">
                 <MutualFriends/>
@@ -23,17 +23,23 @@
 <script>
 import sidebar from '../components/sidebar.vue'
 import TimelineBio from '../components/TimelineBio.vue'
-import Feed from '../components/Feed.vue'
+import FeedInTimeline from '../components/FeedInTimeline.vue'
 import Header from '../components/Header.vue'
 import MutualFriends from '../components/MutualFriends.vue'
 export default {
     components:{
         TimelineBio,
-        Feed,
+        FeedInTimeline,
         Header,
         sidebar,
         MutualFriends
-    }
+    },
+    created(){
+      this.$store.dispatch("getFeedTimeline",localStorage.getItem('userId'))
+      // this.$store.dispatch("/getFeeds/"+)
+      
+
+    },
 
     
 }

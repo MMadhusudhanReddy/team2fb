@@ -8,9 +8,29 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userdetails:[],
-    accesstoken:null
+    accesstoken:null,
+    uploadimageurl:null,
+    searchdetails:[],
+    postreaction:null,
+    feed:[],
+    timelinefeeds:[]
   },
   mutations: {
+    UPDATE_TIMELINE_FEED_DETAILS(state,data)
+    {
+      state.timelinefeeds=data
+
+    },
+    UPDATE_FEED_DETAILS(state,data)
+    {
+      state.feed=data
+    },
+    UPDATE_SEARCH_DETAILS(state,data)
+    {
+      state.searchdetails=data
+
+
+    },
     UPDATE_USER_DETAILS(state,json)
     {
       state.userdetails=json
@@ -18,6 +38,47 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getFeedTimeline(context, userId) {
+      // window.console.log('in store, getproductdetails ', this.state)
+      axios.get('http://10.177.68.182:8083/post/user/timeline/' + userId)
+        .then(product => {
+          window.console.log("inside get feed timeline",product.data.data)
+          context.commit('UPDATE_TIMELINE_FEED_DETAILS', product.data.data)
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
+    },
+    getFeeds(context, userId) {
+      // window.console.log('in store, getproductdetails ', this.state)
+      axios.get('http://10.177.69.66:8084/feed/getFeed/' + userId)
+        .then(product => {
+          window.console.log(product.data.postDTOList)
+          context.commit('UPDATE_FEED_DETAILS', product.data.postDTOList)
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
+    },
+    sendPostReaction(){
+      axios.post('http://10.177.68.182:8083/reaction/addActivity',
+      {
+        "userId":1,
+        // "userId":localStorage.getItem('userId'),
+        "postid":1,
+        "category":"personal"
+
+
+      }).then(response => {
+        window.console.log(response)
+        // context.commit('UPDATE_SEARCH_DETAILS', product.data)
+      })
+      .catch(error => {
+        window.console.log(error)
+      })
+
+
+    },
 
     getAboutDetails({ commit }, userId) {
       // window.console.log('in store, getproductdetails ', this.state)
@@ -31,57 +92,43 @@ export default new Vuex.Store({
           window.console.log(error)
         })
     },
-    userfblogin(context,credentials){
-      window.console.log("fblogin  ",credentials)
-      axios.post('http://172.16.20.32:8080/auth/signin',{
-        
-        email :credentials.email,
-        password:credentials.password,
-        
-      })
-      .then(response=>{
-        window.console.log('response',response)
-        window.console.log("inside second response")
-        this.state.accesstoken="Bearer "+response.data.accessToken
-        axios.post('http://172.16.20.32:8080/jwt/getUserDetails',
-        {
-          "provider": 2
-
-        },{ headers:{"authorization":this.state.accesstoken}})
-        .then(response=>{
-          window.console.log('second response',response)
-          localStorage.setItem('Loginid',response.data.id)
-          if(response.data.role==null)
-          {
-            this.$router.push('/register')
-          }
-          
-          this.$router.push('/landing')
-        })
+    sendPostDetails(){
+      axios.post('http://10.177.68.182:8083/post/addPost',
+      {
+        "category" :"personal",
+        "userId":1,
+        // "userId":localStorage.getItem('userId'),
+        "content":{
+          "video": null,
+          "image":this.state.uploadimageurl,
+          "text":null
 
 
+        }
+
+
+      }).then(response => {
+        window.console.log(response)
+        // context.commit('UPDATE_SEARCH_DETAILS', product.data)
       })
       .catch(error => {
         window.console.log(error)
       })
 
-    },
 
-    // sendGoogleToken() {
-    //   return new Promise((resolve, reject) => {
-    //     axios.get('http://e4f0173c.ngrok.io/google/authenticate/' + localStorage.getItem("gtoken"))
-    //       .then(response => {
-    //         // localStorage.setItem('access_token', token)
-    //         // context.commit('retrieveToken', token)
-    //         // resolve(response)
-    //         window.console.log(response);
-    //       })
-    //       .catch(error => {
-    //         window.console.log(error)
-    //         reject(error)
-    //       })
-    //   })
-    // },
+    },
+    getSearchResults(context,searchText)
+    {
+      axios.get('http://10.177.69.55:8085/search/getAll/'+searchText)
+      .then(product => {
+        window.console.log(product.data)
+        context.commit('UPDATE_SEARCH_DETAILS', product.data)
+      })
+      .catch(error => {
+        window.console.log(error)
+      })
+
+    }
 
 
 
