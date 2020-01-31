@@ -39,7 +39,7 @@ export default {
           })
           // eslint-disable-next-line no-unused-vars
           .then(response => {
-            window.console.log('response',  response)
+            window.console.log('response in login page',  response)
           })
          
       }

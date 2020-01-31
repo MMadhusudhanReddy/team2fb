@@ -7,7 +7,7 @@ import FbLogin from '../views/FbLogin.vue'
 import Register2 from '../views/Register2.vue'
 import BusinessLanding from '../views/Business/BusinessLanding.vue'
 import Timeline from '../views/Timeline.vue'
-
+import Friends from '../views/Friends.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +46,11 @@ const routes = [
     path: '/timeline',
     name: 'Timeline',
     component: Timeline
+  },
+  {
+    path: '/friends',
+    name: 'Friends',
+    component: Friends
   },
   
 ]

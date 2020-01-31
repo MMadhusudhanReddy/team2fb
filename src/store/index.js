@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+// import $router from 'router'
 
 Vue.use(Vuex)
 
@@ -42,13 +43,20 @@ export default new Vuex.Store({
         window.console.log('response',response)
         window.console.log("inside second response")
         this.state.accesstoken="Bearer "+response.data.accessToken
-        axios.get('http://172.16.20.32:8080/jwt/getUserDetails',
+        axios.post('http://172.16.20.32:8080/jwt/getUserDetails',
         {
           "provider": 2
 
         },{ headers:{"authorization":this.state.accesstoken}})
         .then(response=>{
           window.console.log('second response',response)
+          localStorage.setItem('Loginid',response.data.id)
+          if(response.data.role==null)
+          {
+            this.$router.push('/register')
+          }
+          
+          this.$router.push('/landing')
         })
 
 
