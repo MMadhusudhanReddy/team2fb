@@ -40,11 +40,12 @@ export default new Vuex.Store({
   },
   actions: {
     getFeedTimeline(context, userId) {
+      // window.console.log("inside get feed timeline")
       // window.console.log('in store, getproductdetails ', this.state)
       axios.get('http://172.16.20.82:8083/post/user/timeline/' + userId)
         .then(product => {
-          window.console.log("inside get feed timeline",product.data)
-          context.commit('UPDATE_TIMELINE_FEED_DETAILS', product.data)
+          window.console.log("inside get feed timeline",product.data.data)
+          context.commit('UPDATE_TIMELINE_FEED_DETAILS', product.data.data)
         })
         .catch(error => {
           window.console.log(error)
@@ -65,9 +66,9 @@ export default new Vuex.Store({
       axios.post('http://172.16.20.82:8083/reaction/addActivity',
       {
         // "userId":1,
-        "userId":localStorage.getItem('userId'),
-        "postid":this.state.feed[this.state.index].postId,
-        "activity":this.state.postreaction
+        userId:localStorage.getItem('userId'),
+        postid:this.state.timelinefeeds[this.state.index].postId,
+        activity:this.state.postreaction
 
 
       }).then(response => {

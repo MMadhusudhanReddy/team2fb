@@ -9,6 +9,8 @@ import BusinessLanding from '../views/Business/BusinessLanding.vue'
 import Timeline from '../views/Timeline.vue'
 import search from '../views/search.vue'
 import Friends from '../views/Friends.vue'
+import FriendTimeline from '../views/FriendTimeline.vue'
+import commenttry from '../views/commenttry.vue'
 
 
 Vue.use(VueRouter)
@@ -58,6 +60,16 @@ const routes = [
     path: '/friends',
     name: 'friends',
     component: Friends
+  },
+  {
+    path: '/friendtimeline',
+    name: 'Friend Timeline',
+    component: FriendTimeline
+  },
+  {
+    path: '/commenttry',
+    name: 'Comment example',
+    component: commenttry
   },
   
 ]
