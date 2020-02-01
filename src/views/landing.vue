@@ -50,7 +50,7 @@ export default {
 }
 .sidebar{
     background-color: #BFDBF7;
-    width: 20%;
+    width: 23%;
     /* padding-left:1.5%;
     padding-right: 1.5%; */
     margin-right:1%;    

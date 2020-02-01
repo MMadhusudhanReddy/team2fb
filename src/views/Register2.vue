@@ -134,6 +134,7 @@ export default {
         .then(response=>{
           window.console.log('response',response.data.data.userId)
           localStorage.setItem('userId',response.data.data.userId)
+          this.$router.push('/landing/'+localStorage.getItem('userId')+"")
           
           
         })
@@ -141,7 +142,7 @@ export default {
       .catch(error => {
         window.console.log(error)
       })
-      this.$router.push('/landing')
+      
 
     },
 

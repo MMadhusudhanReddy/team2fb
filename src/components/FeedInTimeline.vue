@@ -125,7 +125,7 @@ export default {
     },
     computed:{
       feeds(){
-        window.console.log("inside feed",this.$store.state.timelinefeeds)
+        window.console.log("inside feedtimeline",this.$store.state.timelinefeeds)
         return this.$store.state.timelinefeeds
       },
       
@@ -144,6 +144,7 @@ export default {
         this.$store.state.postreaction="dislike"
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
+        this.$store.state.index=index
         this.$store.dispatch('sendPostReaction')
 
       },
@@ -151,6 +152,7 @@ export default {
         this.$store.state.postreaction="wow"
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
+        this.$store.state.index=index
         this.$store.dispatch('sendPostReaction')
 
       },
@@ -158,6 +160,7 @@ export default {
         this.$store.state.postreaction="angry"
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
+        this.$store.state.index=index
         this.$store.dispatch('sendPostReaction')
 
       }

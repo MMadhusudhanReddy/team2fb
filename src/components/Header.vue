@@ -5,10 +5,10 @@
             <div v-on:click="home" class="home">
                 Home
             </div>
-            <div class="search">
+            <div class="search" >
                 
                 <input v-on:keyup.enter="search"
-          v-model="searchText" type="text" style="height:50%;margin:auto;border-radius:10px;width:100%;text-align:center;font-size:15px;" placeholder="search">
+          v-model="searchText" type="text" style="height:50%;margin:auto;border-radius:10px;width:100%;text-align:center;font-size:15px;outline:none;" placeholder="search">
             </div>
             <!-- <div class="profile">
                 <i class="fas fa-user" style="font-size:30px;color:white;margin-left:3%;"></i>
@@ -35,7 +35,7 @@ export default {
 
  methods: {
     home(){
-        this.$router.push('/landing')
+        this.$router.push('/landing/'+localStorage.getItem('userId')+"")
 
      },
     search() {

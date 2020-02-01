@@ -1,9 +1,9 @@
 <template>
   <div class="Friends">
       <div class="mutualfriendsheading">Friends</div>
-    <div v-for="items in friends" :key="items">
+    <div v-for="(items,index) in friends" :key="items">
       <table>
-        <tr>
+        <tr v-on:click="search(index)">
           <td>
             <img v-bind:src="items.imageUrl" class="image" />
           </td>
@@ -63,8 +63,16 @@ export default {
           return this.$store.state.searchdetails
       }
 
-  }
-};
+  },
+  methods:{
+        search(index){
+        window.console.log(index)
+        this.$store.state.index=index
+        this.$router.push('/friendtimeline')
+
+      },
+}
+}
 </script>
 <style scoped>
 .image

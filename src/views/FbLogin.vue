@@ -1,13 +1,13 @@
 <template>
 <!-- SEND TO PARAS -->
-<div>
+<div class="fbloginclass">
   <h1>LOGIN</h1>
   <div class="login">
    <form>
      <label>
       E-mail:   
      </label>
-    <input  type="text" placeholder="USERNAME/EMAIL" v-model="Username" required><br><br>
+    <input  type="text" placeholder="USERNAME/EMAIL" v-model="Username" required>
     <label>
      PASSWORD:
     </label>
@@ -103,14 +103,20 @@ export default {
 }
 </script>
 <style scoped>
+.fbloginclass{
+  width:40%;
+  margin:auto;
+  margin-top:5%;
+
+}
 h1{
   margin:0 auto;
   background-color:#3b5998;
-  width: 40.3%;
+  width: 100%;
   color:white;
 }
 .login{
-  width:30%;
+  width:100%;
   margin:0 auto;
   border:2px solid black;
   padding:5%;

@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/landing',
+    path: '/landing/:userId',
     name: 'landing',
     component: landing
   },

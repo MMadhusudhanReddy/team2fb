@@ -14,7 +14,8 @@ export default new Vuex.Store({
     postreaction:null,
     feed:[],
     timelinefeeds:[],
-    index:null
+    index:null,
+    
   },
   mutations: {
     UPDATE_TIMELINE_FEED_DETAILS(state,data)
@@ -63,16 +64,21 @@ export default new Vuex.Store({
         })
     },
     sendPostReaction(){
+      window.console.log("inside send post reaction in store")
+      window.console.log("index",this.state.index)
+      window.console.log('post details',this.state.timelinefeeds[this.state.index])
+      window.console.log('postid',this.state.timelinefeeds[this.state.index].postId)
       axios.post('http://172.16.20.82:8083/reaction/addActivity',
       {
         // "userId":1,
         userId:localStorage.getItem('userId'),
-        postid:this.state.timelinefeeds[this.state.index].postId,
+        postId:this.state.timelinefeeds[this.state.index].postId,
         activity:this.state.postreaction
 
 
       }).then(response => {
         window.console.log(response)
+        window.console.log('after axios postid',this.state.timelinefeeds[this.state.index].postId)
         // context.commit('UPDATE_SEARCH_DETAILS', product.data)
       })
       .catch(error => {
@@ -123,7 +129,7 @@ export default new Vuex.Store({
     {
       axios.get('http://172.16.20.138:8085/search/getAll/'+searchText)
       .then(product => {
-        window.console.log(product.data)
+        window.console.log("inside search in store",product.data)
         context.commit('UPDATE_SEARCH_DETAILS', product.data)
       })
       .catch(error => {

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 style="width:42.3%;margin-top:2%;">REGISTER</h1>
+  <div class="formclass">
+    <h1 style="width:100%;margin-top:2%;">REGISTER</h1>
     <div class="register">
       <form>
           
@@ -49,8 +49,9 @@ export default {
               })
               .then(response=>{
                 window.console.log('response',response)
+                this.$router.push('/fblogin')
               })
-              this.$router.push('/fblogin')
+              
           }
           else
           {
@@ -64,6 +65,11 @@ export default {
 }
 </script>
 <style scoped>
+.formclass{
+  width:40%;
+  margin:auto;
+  margin-top:5%;
+}
 .inputfield{
   height:50px;
 }
@@ -75,8 +81,8 @@ h1 {
   color: white;
 }
 .register {
-    width: 32%;
-    height: 40vh;
+    width: 100%;
+    /* height: 40vh; */
     margin: 0 auto;
     border: 2px solid black;
     padding: 5%;
