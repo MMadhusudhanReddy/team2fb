@@ -8,19 +8,20 @@
       <div class="side">
           <!-- <span class="page">Create a page</span><br> -->
         <label>PAGE NAME</label>
-          <input type="text" placeholder="         create a page" class="createpage">
+          <input v-model="pageName" type="text" placeholder="         create a page" class="createpage">
           <br><br>
           <label>CATEGEORIES:</label>
-          <select>
-              <option selected>SPORTS</option>
-              <option>BOLLYWOOD</option>
-              <option>LIFE STYLE</option>
-              <option>TECHNOLOGY</option>
-              <option>FOOD</option>
+          <select v-model="category">
+              <option value="sports">SPORTS</option>
+              <option value="bollywood">BOLLYWOOD</option>
+              <option value="lifestyle">LIFE STYLE</option>
+              <option value="technology">TECHNOLOGY</option>
+              <option value="food">FOOD</option>
           </select>
           <br>
           <br>
-          <router-link to="/BusinessPages"><button>CREATE</button></router-link>
+          <button v-on:click="createpage" > CREATE PAGE </button>
+          <!-- <router-link to="/BusinessPages"><button>CREATE</button></router-link> -->
       </div>
     </div>
 </template>
@@ -29,6 +30,7 @@ export default {
     name:'BusinessBody',
     data(){
         return{
+            category: "sports"
         }
     }
 }

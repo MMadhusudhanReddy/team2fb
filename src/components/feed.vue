@@ -1,10 +1,8 @@
 <template>
     <div class="parentfeed">
-        <div v-for="(order,index) in feeds" v-bind:key="index">
+        <!-- <div v-for="(order,index) in feeds" v-bind:key="index">
             <div class="singlepost">
-                <!-- {{index}} -->
-                <!-- {{order.content.text}} -->
-                <div v-if="order.postDTO.content.image!=null">
+                 <div v-if="order.postDTO.content.image!=null">
                     <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
                 </div>
                 <div v-if="order.postDTO.content.video!=null">
@@ -35,10 +33,130 @@
                     <div v-on:click="postreaction3(index)">
                         <i class="far fa-angry"></i>
                         Angry
+                    </div> --> 
+
+
+
+                  <div v-for="(order,index) in orders" v-bind:key="index">
+                    <div class="singlepost">
+                      <div v-if="order.image!=null">
+                        <img v-bind:src="order.image">
+                      </div>
+                      <div v-if="order.video!=null">
+                        <img v-bind:src="order.video">
+                      </div>
+                      <div v-if="order.text!=null">
+                        <img v-bind:src="order.text">
+                      </div>
+                      </div>
+
+
+
+                       <div class="bottomsection">
+                    <div v-on:click="postreaction(index)">
+                        <i class="far fa-thumbs-up"></i>
+                        Like
                     </div>
+                    <div v-on:click="postreaction1(index)">
+                        <i class="far fa-thumbs-down"></i>
+                        Dislike
                     </div>
+                    <div v-on:click="postreaction2(index)">
+                        <i class="far fa-surprise"></i>
+                        wow
+                    </div>
+                    <div v-on:click="postreaction3(index)">
+                        <i class="far fa-angry"></i>
+                        Angry
+                    </div>
+
+
+
+
+                    <div class="Comment">
+                        <div class="container">
+                      <!-- <h2>Small Modal</h2> -->
+                      <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                          Comment
+                        </button>
+                        <!-- The Modal -->
+                        <div class="modal fade" id="myModal" >
+                          <div class="modal-dialog modal-sm" style="width:50%;">
+                            <div class="modal-content">
+                              <!-- Modal body -->
+
+
+                              <div v-for="(comment,index) in comments" :key="index" class="order">
+                                    <div class="parentcomment">
+                                        <div class="comment">
+                                          parentcommentid:  {{comment.parentid}}
+                                        </div>
+                                        <div class="comment">
+                                          parenttext: {{comment.parenttext}}
+                                        </div>
+                                        <button style="background-color: dodgerblue;font-size: 12px;"> reply </button>
+                                      </div>
+                                      <!-- <hr style="background: 1px solid black; padding:0%;margin:0%;"> -->
+                                      <div class="orderlist">
+                                      <div v-for="(childcomment,commentindex) in comment.childcomments" :key="commentindex" class="item">
+                                        <div class="childcomment">
+                                            <div class="commentchild">
+                                              childcommentid: {{childcomment.commentid}}
+                                            </div>
+                                            <div class="commentchild">
+                                              commenttext:{{childcomment.commenttext}} 
+                                            </div>
+                                        </div>
+                                      </div> 
+                                      </div>
+                                  </div>
+
+
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                                <input type="text" placeholder="start typing.." id="text" style="width:70%;"><br><br>
+                                <button type="button" class="btn btn-secondary" style="width:20%;" data-dismiss="modal" @click="add">send</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
+        </div>
        
 
     </div>

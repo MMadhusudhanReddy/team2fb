@@ -2,6 +2,7 @@
     <div class="BusinessLanding">
         <Header />
         <BusinessSidebar />
+        
     </div>
 </template>
 <script>
