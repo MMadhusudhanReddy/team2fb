@@ -11,6 +11,7 @@ import search from '../views/search.vue'
 import Friends from '../views/Friends.vue'
 import FriendTimeline from '../views/FriendTimeline.vue'
 import commenttry from '../views/commenttry.vue'
+import BusinessPages from '../views/Business/BusinessPages.vue'
 
 
 Vue.use(VueRouter)
@@ -47,7 +48,12 @@ const routes = [
     component: BusinessLanding
   },
   {
-    path: '/timeline',
+    path: '/businesspages',
+    name: 'Business Pages',
+    component: BusinessPages
+  },
+  {
+    path: '/timeline/:userId',
     name: 'Timeline',
     component: Timeline
   },
@@ -57,12 +63,12 @@ const routes = [
     component: search
   },
   {
-    path: '/friends',
+    path: '/friends/:userId',
     name: 'friends',
     component: Friends
   },
   {
-    path: '/friendtimeline',
+    path: '/friendtimeline/:userId',
     name: 'Friend Timeline',
     component: FriendTimeline
   },
@@ -70,6 +76,11 @@ const routes = [
     path: '/commenttry',
     name: 'Comment example',
     component: commenttry
+  },
+  {
+    path: '/businesspages',
+    name: 'Business Pages',
+    component: BusinessPages
   },
   
 ]

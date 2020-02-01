@@ -118,7 +118,7 @@ export default {
     },
     created(){
         window.console.log("inside created of feedInTimeline")
-      this.$store.dispatch("getFeedTimeline",localStorage.getItem('userId'))
+      this.$store.dispatch("getFeedTimeline",this.$route.params.productId )
       // this.$store.dispatch("/getFeeds/"+)
       
 

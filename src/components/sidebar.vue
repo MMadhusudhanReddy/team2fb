@@ -1,9 +1,9 @@
 <template>
     <div>
         <!-- <router-link to="/landing" tag="button" class="btn btn-secondary" style="font-style:italic;margin:1%">My Profile</router-link> -->
-        <div class="sidebar">
+        <!-- <div class="sidebar">
             <u>My Profile</u>
-        </div>
+        </div> -->
         <div v-on:click="timeline" class="sidebar">
             <u>Timeline </u>
         </div>
@@ -34,10 +34,10 @@ export default {
             this.$router.push("/myprofile/"+localStorage.getItem('userId')+"")
         },
         friends(){
-            this.$router.push("/friends")
+            this.$router.push("/friends/"+localStorage.getItem('userId')+"")
         },
         timeline(){
-            this.$router.push("/timeline")
+            this.$router.push("/timeline/"+localStorage.getItem('userId')+"")
         }
     }
 }
@@ -69,6 +69,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 10%;
+    margin-bottom:10%;
 }
 
 </style>

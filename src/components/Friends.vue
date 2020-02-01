@@ -7,11 +7,11 @@
           <td>
             <img v-bind:src="items.image" class="image" />
           </td>
-          <td>&nbsp;&nbsp;&nbsp;
+          <td>
               {{items.name}}
           </td>
           <td>
-            <button>ADD FRIEND</button>
+            <button >ADD FRIEND</button>
           </td>
         </tr>
       </table>
@@ -60,7 +60,19 @@ export default {
         }
       ]
     };
-  }
+  },
+   created(){
+      this.$store.dispatch("getFriends",localStorage.getItem('userId'))
+      // this.$store.dispatch("/getFeeds/"+)
+      
+
+    },
+    methods:{
+        addfriend(){
+            this.$store.dispatch("")
+        }
+    }
+
 };
 </script>
 <style scoped>
@@ -81,15 +93,16 @@ button{
 .Friends {
   font-family: sans-serif;
   font-size: 10px;
-  margin:auto;
-  width:30%;
+  /* margin:auto; */
+  /* width:30%; */
 }
 table {
   border : 1px solid black;
-  width: 400px;
+  width: 300px;
   /* padding:10px; */
 }
 td{
-    text-align:center;
+    /* text-align:center; */
+
 }
 </style>

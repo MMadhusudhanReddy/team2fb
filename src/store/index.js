@@ -15,9 +15,20 @@ export default new Vuex.Store({
     feed:[],
     timelinefeeds:[],
     index:null,
-    
+    friends:[],
+    ads:[]
+
   },
   mutations: {
+    UPDATE_ADS(state,data)
+    {
+      state.ads=data
+    },
+    UPDATE_FRIENDS(state,data)
+    {
+      state.searchdetails=data
+
+    },
     UPDATE_TIMELINE_FEED_DETAILS(state,data)
     {
       state.timelinefeeds=data
@@ -40,6 +51,53 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    addfriendrequest(friendid)
+    {
+      axios.post('http://172.16.20.180:8082/user/addFriendRequest',
+      {
+        userId:localStorage.getItem('userId'),
+        friendId :friendid
+
+      })
+      .then(response => {
+        window.console.log(response)
+        // window.console.log('after axios postid',this.state.timelinefeeds[this.state.index].postId)
+        // context.commit('UPDATE_SEARCH_DETAILS', product.data)
+      })
+      .catch(error => {
+        window.console.log(error)
+      })
+
+
+    },
+    getAds(context)
+    {
+      axios.get('http://172.16.20.181:8080/ads/getAds/1',
+      {
+        // headers:{"authorization":localStorage.getItem('accessToken')}
+         headers:{"authorization":'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWQiOjIsIm5hbWUiOiJCaHVtaSIsImVtYWlsIjoiYmh1bWkucGF0ZWxAY292aWFtLmNvbSIsImlhdCI6MTU4MDQ2MzEzNSwiZXhwIjoxNTgxMzI3MTM1fQ.Vy-da5MWLd6CsGdGjP6EEwi6vvWSiCt3NfWhQX0I3ckwBINpQb2VPJ8xcMsrRYCHdIxxeSFKTgqc6KvPvfcVPQ'}
+
+      })
+      .then(response => {
+        window.console.log("Ads::", response)
+        context.commit('UPDATE_ADS', response.data)
+      })
+      .catch(error => {
+        window.console.log(error)
+      })
+    },
+    getFriends(context,userId)
+    {
+      axios.get('http://172.16.20.180:8082/user/getFriends/' + userId)
+        .then(product => {
+          window.console.log("inside get friends",product.data.data)
+          context.commit('UPDATE_FRIENDS', product.data.data)
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
+
+    },
     getFeedTimeline(context, userId) {
       // window.console.log("inside get feed timeline")
       // window.console.log('in store, getproductdetails ', this.state)
@@ -53,11 +111,11 @@ export default new Vuex.Store({
         })
     },
     getFeeds(context, userId) {
-      // window.console.log('in store, getproductdetails ', this.state)
+      window.console.log('in store, feeds ')
       axios.get('http://172.16.20.113:8084/feed/getFeed/' + userId)
         .then(product => {
-          window.console.log(product.data.postDTOList)
-          context.commit('UPDATE_FEED_DETAILS', product.data.postDTOList)
+          window.console.log(product.data)
+          context.commit('UPDATE_FEED_DETAILS', product.data.postUserDTOList)
         })
         .catch(error => {
           window.console.log(error)
@@ -87,10 +145,34 @@ export default new Vuex.Store({
 
 
     },
+    sendPostReaction1(){
+      window.console.log("inside send post reaction in store")
+      window.console.log("index",this.state.index)
+      window.console.log('post details',this.state.feed[this.state.index])
+      window.console.log('postid',this.state.feed[this.state.index].postId)
+      axios.post('http://172.16.20.82:8083/reaction/addActivity',
+      {
+        // "userId":1,
+        userId:localStorage.getItem('userId'),
+        postId:this.state.feed[this.state.index].postId,
+        activity:this.state.postreaction
+
+
+      }).then(response => {
+        window.console.log(response)
+        window.console.log('after axios postid',this.state.feed[this.state.index].postId)
+        // context.commit('UPDATE_SEARCH_DETAILS', product.data)
+      })
+      .catch(error => {
+        window.console.log(error)
+      })
+
+
+    },
 
     getAboutDetails({ commit }, userId) {
       // window.console.log('in store, getproductdetails ', this.state)
-      axios.get('http://10.177.68.178:8082/user/getUserDetails/' + userId.userId)
+      axios.get('http://172.16.20.180:8082/user/getUserDetails/' + userId.userId)
         .then(product => {
           window.console.log(product.data)
           commit('UPDATE_USER_DETAILS', product.data.data)
@@ -101,19 +183,18 @@ export default new Vuex.Store({
         })
     },
     sendPostDetails(){
-      axios.post('http://10.177.68.182:8083/post/addPost',
+      window.console.log(localStorage.getItem('userId'))
+      window.console.log("inside image send post details")
+      axios.post('http://172.16.20.82:8083/post/addPost',
       {
         "category" :"personal",
-        "userId":1,
-        // "userId":localStorage.getItem('userId'),
+        // "userId":39,
+        "userId":localStorage.getItem('userId'),
         "content":{
           "video": null,
           "image":this.state.uploadimageurl,
           "text":null
-
-
         }
-
 
       }).then(response => {
         window.console.log(response)

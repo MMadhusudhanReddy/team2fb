@@ -15,10 +15,7 @@
                     <label>NAME</label>
                     <input type="text" placholder="name" v-model="getuserdetails.userName" class="editable">
                 </div>
-                <div class="fields">
-                    <label>DOB</label>
-                    <!-- <input type="Date" v-model="date" class="editable"> -->
-                </div>
+               
                 <div class="fields">
                     <label>DOMAINS INTERSETED</label>
                     <select class="editable">
@@ -85,11 +82,11 @@ export default {
   height:50px;
 }
 .Myprofile{
-  width: 38%;
-  
+  width: 40%;
+  padding:2%;
   border: 2px solid black;
-  padding: 5%;
   font-family: sans-serif;
+  margin-left:10%;
 }
 label {
   float:left;

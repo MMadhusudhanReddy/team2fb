@@ -10,7 +10,7 @@
           <p> {{NAME}} </p>
       </div>
       <div  class="addfriend">
-          <div v-if="seen"> Add Friend </div>
+          <div v-if="seen" v-on:click="addfriend"> Add Friend </div>
           <p v-else> Following </p>
 
       </div>
@@ -29,11 +29,16 @@ export default {
     },
     computed:{
       bio(){
-        window.console.log("inside timeline bio",this.$store.state.timelinefeeds[0])
+        window.console.log("inside friend timeline bio",this.$store.state.timelinefeeds[0])
         return this.$store.state.timelinefeeds[0]
       }
 
     },
+    methods:{
+        addfriend(){
+            this.$store.dispatch("addfriendrequest",this.$route.params.productId)
+        }
+    }
     
 }
 </script>

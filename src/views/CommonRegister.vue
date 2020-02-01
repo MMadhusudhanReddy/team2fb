@@ -1,4 +1,5 @@
 <template>
+<div class="register">
   <div class="formclass">
     <h1 style="width:100%;margin-top:2%;">REGISTER</h1>
     <div class="register">
@@ -23,6 +24,7 @@
         
       </form>
     </div>
+  </div>
   </div>
 </template>
 <script>

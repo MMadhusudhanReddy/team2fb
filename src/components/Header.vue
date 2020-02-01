@@ -16,7 +16,7 @@
             <div class="notification">
                 <i class="far fa-bell" style="font-size:30px;color:white;"></i>
             </div>
-            <div class="signout">
+            <div v-on:click="logout" class="signout">
                 <i class="fas fa-sign-out-alt" style="font-size:30px;color:white;"></i>
             </div>
 
@@ -56,6 +56,11 @@ export default {
       // this.$store.dispatch('getResults',this.searchText);
       // this.$router.push('/searchresults');
     },
+    logout(){
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userId");
+        this.$router.push('/fblogin')
+    }
  }
 }
  </script>

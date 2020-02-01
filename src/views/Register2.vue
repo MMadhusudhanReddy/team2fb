@@ -129,7 +129,9 @@ export default {
           "mobileNumber":this.contactnumber,
           "interests":[this.interest],
           "profileType":this.selected,
-          "displayType":this.profiletype
+          "displayType":this.profiletype,
+          "friendIds":[""],
+          "pendingFriendIds":[""]
         },{ headers:{"Auth":localStorage.getItem('accessToken')}})
         .then(response=>{
           window.console.log('response',response.data.data.userId)
@@ -142,6 +144,33 @@ export default {
       .catch(error => {
         window.console.log(error)
       })
+
+
+
+      //to keval
+
+      axios.post('http://172.16.20.33:8080/search/register',
+        {
+          "userId":localStorage.getItem('userId'),
+          "action":"register",
+          "appId":"facebook",
+          "tag":[this.interest]
+
+        },)
+        .then(response=>{
+          window.console.log('response',response.data.data.userId)
+          localStorage.setItem('userId',response.data.data.userId)
+          this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+          
+          
+        })
+
+      .catch(error => {
+        window.console.log(error)
+      })
+
+
+
       
 
     },

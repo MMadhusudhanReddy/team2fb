@@ -9,7 +9,7 @@
                 <sidebar/>
             </div>
             <div class="feeds">
-                <feed/>
+                <Feed/>
             </div>
             <div class="ads">
                 <Ads/>
@@ -61,7 +61,7 @@ export default {
 }
 .ads{
     background-color: #BFDBF7;
-    width: 23%;
+    width: 25%;
     padding-left: 1%;
     padding-right: 1%;
     margin-left:1%; 

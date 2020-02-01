@@ -14,7 +14,7 @@
       <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
     </div>
     <div v-if="imageData!=null">
-        <img class="preview" :src="picture">
+        <img class="preview" :src="picture" style="width:200px;height:100px">
         <br>
       <button @click="onUpload">Upload</button>
     </div>
@@ -52,7 +52,7 @@ export default {
       ()=>{this.uploadValue=100;
         storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.picture =url;
-          window.console.log(this.picture)
+          window.console.log('picture',this.picture)
           this.$store.state.uploadimageurl=this.picture
           this.$store.dispatch('sendPostDetails')
         });

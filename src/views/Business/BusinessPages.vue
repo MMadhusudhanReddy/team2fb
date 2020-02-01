@@ -1,17 +1,17 @@
 <template>
     <div class="BusinessLanding">
         <Header />
-        <BusinessBody />
+        <BusinessSidebar />
     </div>
 </template>
 <script>
 import Header from '@/components/Header.vue';
-import BusinessBody from '@/components/Business/BusinessBody.vue';
+import BusinessSidebar from '@/components/Business/BusinessSidebar.vue';
 export default {
     name:'BusinessLanding',
     components:{
      Header,
-     BusinessBody,
+     BusinessSidebar,
     },
     data(){
         return{

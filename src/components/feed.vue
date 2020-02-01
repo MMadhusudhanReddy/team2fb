@@ -4,19 +4,19 @@
             <div class="singlepost">
                 <!-- {{index}} -->
                 <!-- {{order.content.text}} -->
-                <div v-if="order.content.image!=null">
-                    <img v-bind:src="order.content.image" style="width:100%;height:280px;"><br>
+                <div v-if="order.postDTO.content.image!=null">
+                    <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
                 </div>
-                <div v-if="order.content.video!=null">
+                <div v-if="order.postDTO.content.video!=null">
                     <video style="width:100%;" autoplay>
-                        <source v-bind:src="order.content.video" type="video/mp4">
+                        <source v-bind:src="order.postDTO.content.video" type="video/mp4">
                         <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
                         This video is not supported by the browser
                     </video> 
                 </div>
-                <div v-if="order.content.text!=null">
+                <div v-if="order.postDTO.content.text!=null">
                   <div style="width:100%">
-                    <p style="width:100%">{{order.content.text}}   </p>  
+                    <p style="width:100%">{{order.postDTO.content.text}}   </p>  
                   </div>
                 </div>
                 <div class="bottomsection">
@@ -36,114 +36,10 @@
                         <i class="far fa-angry"></i>
                         Angry
                     </div>
-
-
-                      <div class="Comment">
-                        <div class="container">
-                      <!-- <h2>Small Modal</h2> -->
-                      <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                          Comment
-                        </button>
-                        <!-- The Modal -->
-                        <div class="modal fade" id="myModal" >
-                          <div class="modal-dialog modal-sm" style="width:50%;">
-                            <div class="modal-content">
-                              <!-- Modal body -->
-
-
-                              <div v-for="(comment,index) in comments" :key="index" class="order">
-                                    <div class="parentcomment">
-                                        <div class="comment">
-                                          parentcommentid:  {{comment.parentid}}
-                                        </div>
-                                        <div class="comment">
-                                          parenttext: {{comment.parenttext}}
-                                        </div>
-                                      </div>
-                                      <!-- <hr style="background: 1px solid black; padding:0%;margin:0%;"> -->
-                                      <div class="orderlist">
-                                      <div v-for="(childcomment,commentindex) in comment.childcomments" :key="commentindex" class="item">
-                                        <div class="childcomment">
-                                            <div class="commentchild">
-                                              childcommentid: {{childcomment.commentid}}
-                                            </div>
-                                            <div class="commentchild">
-                                              commenttext:{{childcomment.commenttext}} 
-                                            </div>
-                                        </div>
-                                      </div> 
-                                      </div>
-                                  </div>
-
-
-                              <!-- Modal footer -->
-                              <div class="modal-footer">
-                                <input type="text" placeholder="start typing.." id="text" style="width:70%;"><br><br>
-                                <button type="button" class="btn btn-secondary" style="width:20%;" data-dismiss="modal" @click="add">send</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div>
-                        <!-- <v-btn
-        color="primary"
-        dark
-        @click.stop="dialog = true"
-      >
-        Open Dialog
-      </v-btn>
-  
-      <v-dialog
-        v-model="dialog"
-        max-width="290"
-      >
-        <v-card>
-          <v-card-title class="headline">Use Google's location service?</v-card-title>
-  
-          <v-card-text>
-            Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
-          </v-card-text>
-  
-          <v-card-actions>
-            <v-spacer></v-spacer>
-  
-            <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-            >
-              Disagree
-            </v-btn>
-  
-            <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-            >
-              Agree
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
                     </div>
                 </div>
             </div>
-        </div>
+       
 
     </div>
 </template>
@@ -225,6 +121,7 @@ export default {
         }
     },
     created(){
+      window.console.log("inside feeds created")
       this.$store.dispatch("getFeeds",localStorage.getItem('userId'))
       // this.$store.dispatch("/getFeeds/"+)
       
@@ -243,7 +140,7 @@ export default {
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
         this.$store.state.index=index
-        this.$store.dispatch('sendPostReaction')
+        this.$store.dispatch('sendPostReaction1')
 
       },
       postreaction1(index){
@@ -251,7 +148,7 @@ export default {
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
         this.$store.state.index=index
-        this.$store.dispatch('sendPostReaction')
+        this.$store.dispatch('sendPostReaction1')
 
       },
       postreaction2(index){
@@ -259,7 +156,7 @@ export default {
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
         this.$store.state.index=index
-        this.$store.dispatch('sendPostReaction')
+        this.$store.dispatch('sendPostReaction1')
 
       },
       postreaction3(index){
@@ -267,7 +164,7 @@ export default {
         window.console.log("reaction",this.$store.state.postreaction)
         window.console.log(index)
         this.$store.state.index=index
-        this.$store.dispatch('sendPostReaction')
+        this.$store.dispatch('sendPostReaction1')
 
       }
       

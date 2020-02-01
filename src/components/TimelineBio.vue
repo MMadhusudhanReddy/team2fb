@@ -5,7 +5,6 @@
       </div>
       <div class="right">
           <p>NAME : {{bio.userName}}</p>
-          <p>DOB:{{DOB}}</p>
       </div>
     </div>
 </template>
@@ -46,6 +45,6 @@ img{
     float:left;
     width:60%;
     font-weight:bold;
-    font-size:20px;
+    font-size: 16px;
 }
 </style>

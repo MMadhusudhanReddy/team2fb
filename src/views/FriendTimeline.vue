@@ -35,8 +35,9 @@ export default {
         MutualFriends
     },
     created(){
-      this.$store.dispatch("getFeedTimeline",localStorage.getItem('userId'))
-      // this.$store.dispatch("/getFeeds/"+)
+      this.$store.dispatch("getFeedTimeline",this.$route.params.productId)
+
+      
       
 
     },
@@ -65,7 +66,7 @@ export default {
 }
 .ads{
     background-color: #BFDBF7;
-    width: 23%;
+    width: 28%;
     padding-left: 1%;
     padding-right: 1%;
     margin-left:1%; 

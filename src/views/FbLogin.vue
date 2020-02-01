@@ -60,19 +60,19 @@ export default {
         this.$store.state.accesstoken="Bearer "+response.data.accessToken
         axios.post('http://172.16.20.32:8080/jwt/getUserDetails',
         {
-          "provider": 2
+          "provider": 1
 
         },{ headers:{"authorization":this.$store.state.accesstoken}})
         .then(response=>{
           window.console.log('second response',response)
-          localStorage.setItem('Loginid',response.data.id)
+          localStorage.setItem('userId',response.data.id)
           localStorage.setItem('accessToken',this.$store.state.accesstoken)
           if(response.data.role==null)
           {
             this.$router.push('/register')
           }
           else{
-            this.$router.push('/landing')
+            this.$router.push('/landing/'+localStorage.getItem('userId'))
 
           }
           

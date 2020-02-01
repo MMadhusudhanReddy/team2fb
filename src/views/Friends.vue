@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="parentfriends">
         <Header/>
         <div class="friends">
             <MutualFriends/>
@@ -23,6 +23,9 @@ export default {
 <style>
 .friends{
     margin: auto;
-    width:400px;
+    width:25%;
+}
+.parentfriends{
+    width:100%;
 }
 </style>
