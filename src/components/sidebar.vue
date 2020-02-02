@@ -4,13 +4,13 @@
         <!-- <div class="sidebar">
             <u>My Profile</u>
         </div> -->
-        <div v-on:click="timeline" class="sidebar">
+        <div v-on:click="timeline" class="sidebar pointer">
             <u>Timeline </u>
         </div>
-        <div v-on:click="friends" class="sidebar">
+        <div v-on:click="friends" class="sidebar pointer">
            <u> Friends </u>
         </div>
-        <div v-on:click="about" class="sidebar">
+        <div v-on:click="about" class="sidebar pointer">
            <u> About </u>
         </div>
         <!-- <div class="sidebarbuttons">
@@ -70,6 +70,10 @@ export default {
     justify-content: center;
     margin-top: 10%;
     margin-bottom:10%;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 </style>
