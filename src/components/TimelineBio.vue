@@ -4,7 +4,8 @@
           <img :src="bio.imageUrl"  alt="image" height="150" width="150">
       </div>
       <div class="right">
-          <p>NAME : {{bio.userName}}</p>
+          <!-- <p>NAME : {{localStorage.getItem('name') }}</p> -->
+          <p>NAME : {{name}}</p>
       </div>
     </div>
 </template>
@@ -14,7 +15,8 @@ export default {
         return{
         image :'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2SYQzKh19n2C5VP1AkWYgk17RtmiilqMr_MEBSN9T85k3S77i',
         NAME :'KAMAL',
-        DOB:'10/03/1998'
+        DOB:'10/03/1998',
+        name:localStorage.getItem('name')
         }
     },
     computed:{

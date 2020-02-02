@@ -4,6 +4,10 @@
             <div class="singlepost">
                 <!-- {{index}} -->
                 <!-- {{order.content.text}} -->
+                <div class="topsection">
+                    <img v-bind:src="order.imageurl" style="width:50px;border-radius:50%;" >
+                    <div style="padding: 2%;float:left;"> {{order.userName}} </div>
+                </div>
                 <div v-if="order.postDTO.content.image!=null">
                     <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
                 </div>
@@ -118,7 +122,7 @@ export default {
     },
     created(){
         window.console.log("inside created of feedInTimeline")
-      this.$store.dispatch("getFeedTimeline",this.$route.params.productId )
+      this.$store.dispatch("getFeedTimeline", this.$route.params.userId)
       // this.$store.dispatch("/getFeeds/"+)
       
 

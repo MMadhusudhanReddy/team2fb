@@ -23,7 +23,7 @@
         <div class="inputfield">
         <label>ROLE</label>
         <select v-model="selected" @change="disable($event)">
-          <option selected value="user">USER</option>
+          <option selected value="personal">personal</option>
           <option value="business" >BUSINESS </option>
         </select><br><br>
         </div>
@@ -151,9 +151,8 @@ export default {
 
         },)
         .then(response=>{
-          window.console.log('response',response.data.data.userId)
-          localStorage.setItem('userId',response.data.data.userId)
-          this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+          window.console.log('response from aman',response)
+          
           
           
         })

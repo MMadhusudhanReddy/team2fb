@@ -16,7 +16,8 @@ export default new Vuex.Store({
     timelinefeeds:[],
     index:null,
     friends:[],
-    ads:[]
+    ads:[],
+    uploadtext:null
 
   },
   mutations: {
@@ -74,8 +75,8 @@ export default new Vuex.Store({
     {
       axios.get('http://172.16.20.181:8080/ads/getAds/1',
       {
-        // headers:{"authorization":localStorage.getItem('accessToken')}
-         headers:{"authorization":'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWQiOjIsIm5hbWUiOiJCaHVtaSIsImVtYWlsIjoiYmh1bWkucGF0ZWxAY292aWFtLmNvbSIsImlhdCI6MTU4MDQ2MzEzNSwiZXhwIjoxNTgxMzI3MTM1fQ.Vy-da5MWLd6CsGdGjP6EEwi6vvWSiCt3NfWhQX0I3ckwBINpQb2VPJ8xcMsrRYCHdIxxeSFKTgqc6KvPvfcVPQ'}
+        headers:{"authorization":localStorage.getItem('accessToken')}
+        //  headers:{"authorization":'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWQiOjIsIm5hbWUiOiJCaHVtaSIsImVtYWlsIjoiYmh1bWkucGF0ZWxAY292aWFtLmNvbSIsImlhdCI6MTU4MDQ2MzEzNSwiZXhwIjoxNTgxMzI3MTM1fQ.Vy-da5MWLd6CsGdGjP6EEwi6vvWSiCt3NfWhQX0I3ckwBINpQb2VPJ8xcMsrRYCHdIxxeSFKTgqc6KvPvfcVPQ'}
 
       })
       .then(response => {
@@ -144,6 +145,32 @@ export default new Vuex.Store({
       })
 
 
+
+      //to aman for post reaction
+
+      axios.post('http://172.16.20.33:8080/search/save',
+              {
+                "targetId":this.state.timelinefeeds[this.state.index].postDTO.userId,
+                "action":this.state.postreaction,
+                "appId":"facebook",
+                "userId":localStorage.getItem('userId'),
+                "targetEntity":"post",
+                "tag":""
+
+              },)
+              .then(response=>{
+                window.console.log('aman response',response)
+                // localStorage.setItem('userId',response.data.data.userId)
+                // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+                
+                
+              })
+
+            .catch(error => {
+              window.console.log(error)
+            })
+
+
     },
     sendPostReaction1(){
       window.console.log("inside send post reaction in store")
@@ -168,6 +195,34 @@ export default new Vuex.Store({
       })
 
 
+
+
+      //to aman for post reaction
+
+      axios.post('http://172.16.20.33:8080/search/save',
+              {
+                "targetId":this.state.timelinefeeds[this.state.index].postDTO.userId,
+                "action":this.state.postreaction,
+                "appId":"facebook",
+                "userId":localStorage.getItem('userId'),
+                "targetEntity":"post",
+                "tag":""
+
+              },)
+              .then(response=>{
+                window.console.log('aman response',response)
+                // localStorage.setItem('userId',response.data.data.userId)
+                // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+                
+                
+              })
+
+            .catch(error => {
+              window.console.log(error)
+            })
+
+
+
     },
 
     getAboutDetails({ commit }, userId) {
@@ -183,8 +238,10 @@ export default new Vuex.Store({
         })
     },
     sendPostDetails(){
-      window.console.log(localStorage.getItem('userId'))
+      
       window.console.log("inside image send post details")
+      window.console.log(localStorage.getItem('userId'))
+      window.console.log("upload text",this.state.uploadtext)
       axios.post('http://172.16.20.82:8083/post/addPost',
       {
         "category" :"personal",
@@ -193,7 +250,7 @@ export default new Vuex.Store({
         "content":{
           "video": null,
           "image":this.state.uploadimageurl,
-          "text":null
+          "text":this.state.uploadtext
         }
 
       }).then(response => {
@@ -203,6 +260,31 @@ export default new Vuex.Store({
       .catch(error => {
         window.console.log(error)
       })
+
+
+      //to aman for create post
+
+      axios.post('http://172.16.20.33:8080/search/save',
+              {
+                "targetId":"",
+                "action":"post",
+                "appId":"facebook",
+                "userId":localStorage.getItem('userId'),
+                "targetEntity":"image",
+                "tag":""
+
+              },)
+              .then(response=>{
+                window.console.log('aman response',response)
+                // localStorage.setItem('userId',response.data.data.userId)
+                // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+                
+                
+              })
+
+            .catch(error => {
+              window.console.log(error)
+            })
 
 
     },

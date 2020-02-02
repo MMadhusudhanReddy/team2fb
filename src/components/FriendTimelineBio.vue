@@ -1,13 +1,13 @@
 <template>
     <div class="Timelinebio">
       <div class="left">
-          <!-- <img :src="bio.imageUrl"  alt="image" height="150" width="150"> -->
-          <img :src="image"  alt="image" height="150" width="150">
+          <img :src="bio.imageUrl"  alt="image" height="150" width="150">
+          <!-- <img :src="image"  alt="image" height="150" width="150"> -->
       </div>
       <div class="right">
           <!-- <p>NAME : {{bio.userName}}</p>
           <p>DOB:{{DOB}}</p> -->
-          <p> {{NAME}} </p>
+          <p> {{bio.userName}} </p>
       </div>
       <div  class="addfriend">
           <div v-if="seen" v-on:click="addfriend"> Add Friend </div>

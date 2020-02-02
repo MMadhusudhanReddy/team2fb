@@ -4,7 +4,7 @@
             Write Post
         </div>
         <div class="insidecreatepost">
-            <input class="inputbox" type="text" placeholder="        Write Something here.....">
+            <input v-model="uploadtextcontent"   class="inputbox" type="text" placeholder="        Write Something here.....">
             <div >
       <p>Upload an image to Firebase:</p>
       <input type="file" @change="previewImage" accept="image/*" >
@@ -33,7 +33,8 @@ export default {
         return{
             imageData: null,
             picture: null,
-            uploadValue: 0
+            uploadValue: 0,
+            uploadtextcontent:null
         }
     },
    methods:{
@@ -54,6 +55,7 @@ export default {
           this.picture =url;
           window.console.log('picture',this.picture)
           this.$store.state.uploadimageurl=this.picture
+          this.$store.state.uploadtext=this.uploadtextcontent
           this.$store.dispatch('sendPostDetails')
         });
       }

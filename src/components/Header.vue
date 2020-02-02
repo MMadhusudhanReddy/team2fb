@@ -59,20 +59,19 @@ export default {
       // this.$router.push('/searchresults');
     },
     logout(){
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("userId");
+
         axios.post('http://172.16.20.33:8080/search/save',
         {
           "targetId":null,
-          "action":"login",
-          "appId:":"facebook",
+          "action":"logout",
+          "appId":"facebook",
           "userId":localStorage.getItem('userId'),  
           "targetEntity":"null",
           "tag":"null"
 
         },)
         .then(response=>{
-          window.console.log('response',response.data.data.userId)
+          window.console.log('response',response)
           // localStorage.setItem('userId',response.data.data.userId)
           // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
           
@@ -82,6 +81,16 @@ export default {
       .catch(error => {
         window.console.log(error)
       })
+
+
+
+
+
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+        
         this.$router.push('/fblogin')
 
     }

@@ -1,8 +1,8 @@
 <template>
   <div class="Friends">
       <div class="mutualfriendsheading">Friends
-        <div v-for="(items) in friends" :key="items">
-            <div style="display:flex;flex-direction:row;border:1px solid black;justify-content:space-between;padding:5%;">
+        <div v-for="(items,index) in friends" :key="index">
+            <div v-on:click="search(index)"  style="display:flex;flex-direction:row;border:1px solid black;justify-content:space-between;padding:5%;">
                 <div>
                     <img v-bind:src="items.imageUrl" class="image" />
 
@@ -62,7 +62,7 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch("getFriends",localStorage.getItem('userId'))
+    this.$store.dispatch("getFriends", this.$route.params.userId)
 
   },
   computed:{
@@ -72,12 +72,25 @@ export default {
 
   },
   methods:{
-        search(index){
-        window.console.log(index)
+    search(index){
+        window.console.log("search details",this.$store.state.searchdetails)
+        window.console.log('index',index)
+        window.console.log('user id in search method',this.$store.state.searchdetails[index].userId)
+        window.console.log('user id from local storage ',localStorage.getItem('userId'))
         this.$store.state.index=index
-        this.$router.push('/friendtimeline/'+this.$store.state.searchdetails[this.$store.state.index].userId)
+        if(this.$store.state.searchdetails[index].userId===localStorage.getItem('userId'))
+        {
+            this.$router.push('/timeline/'+localStorage.getItem('userId')+'')
 
-      },
+        }
+        else
+        {
+            this.$router.push('/friendtimeline/'+this.$store.state.searchdetails[this.$store.state.index].userId+'')
+
+        }
+        
+
+    },
 }
 }
 </script>
