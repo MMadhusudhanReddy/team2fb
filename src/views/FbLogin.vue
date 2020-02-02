@@ -67,6 +67,44 @@ export default {
           window.console.log('second response',response)
           localStorage.setItem('userId',response.data.id)
           localStorage.setItem('accessToken',this.$store.state.accesstoken)
+          localStorage.setItem('name',response.data.name)
+          localStorage.setItem('email',response.data.email)
+
+
+
+
+          //to aman
+
+            axios.post('http://172.16.20.33:8080/search/save',
+              {
+                "targetId":null,
+                "action":"login",
+                "appId":"facebook",
+                "userId":localStorage.getItem('userId'),  
+                "targetEntity":null,
+                "tag":null
+
+              },)
+              .then(response=>{
+                window.console.log('aman response',response)
+                // localStorage.setItem('userId',response.data.data.userId)
+                // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+                
+                
+              })
+
+            .catch(error => {
+              window.console.log(error)
+            })
+
+
+
+
+
+
+
+
+
           if(response.data.role==null)
           {
             this.$router.push('/register')
@@ -83,6 +121,10 @@ export default {
       .catch(error => {
         window.console.log(error)
       })
+
+
+      
+
 
     },
     register()

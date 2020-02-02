@@ -26,7 +26,9 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
+
     data() {
     return {
       searchText: ""
@@ -59,7 +61,29 @@ export default {
     logout(){
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
+        axios.post('http://172.16.20.33:8080/search/save',
+        {
+          "targetId":null,
+          "action":"login",
+          "appId:":"facebook",
+          "userId":localStorage.getItem('userId'),  
+          "targetEntity":"null",
+          "tag":"null"
+
+        },)
+        .then(response=>{
+          window.console.log('response',response.data.data.userId)
+          // localStorage.setItem('userId',response.data.data.userId)
+          // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
+          
+          
+        })
+
+      .catch(error => {
+        window.console.log(error)
+      })
         this.$router.push('/fblogin')
+
     }
  }
 }

@@ -1,18 +1,10 @@
 <template>
   <div>
+    <div class="parentregister">
     <h1>REGISTER</h1>
     <div class="register">
       <form>
           <div>
-        <div class="inputfield">
-            <label>NAME:</label>
-            <input type="text" placeholder="NAME" v-model="name"
-            required/><br><br>
-        </div>
-        <div class="inputfield">
-            <label>E-MAIL:</label>
-            <input type="email" placeholder="E-mail" v-model="email" required/><br><br>
-        </div>
         <div class="inputfield">
             <label>MOBILE NUMBER</label>
             <input type="number" placeholder="CONTACT" v-model="contactnumber" required/><br><br>
@@ -56,6 +48,7 @@
         </div>
       </form>
     </div>
+    </div>
   </div>
 </template>
 <script>
@@ -92,10 +85,10 @@ export default {
    },
    register(){
      window.console.log(this.selected)
-     window.console.log("userName",this.name)
+     window.console.log("userName from local storage",localStorage.getItem('name'))
           window.console.log("gender",this.gender)
-          window.console.log("email",this.email)
-          window.console.log("DOB",this.date)
+          window.console.log("email from local storage",localStorage.getItem('email'))
+          window.console.log("DOB",this.date.toString())
           window.console.log("mobileNumber",this.contactnumber)
           window.console.log("interests",this.interest)
           window.console.log("profileType",this.selected)
@@ -122,10 +115,10 @@ export default {
       //to vanik
        axios.post('http://172.16.20.180:8082/user/editDetails',
         {
-          "userName":this.name,
+          "userName":localStorage.getItem('name'),
           "gender":this.gender,
-          "email":this.email,
-          "DOB":this.date,
+          "email":localStorage.getItem('email'),
+          "DOB":this.date.toString(),
           "mobileNumber":this.contactnumber,
           "interests":[this.interest],
           "profileType":this.selected,
@@ -147,7 +140,7 @@ export default {
 
 
 
-      //to keval
+      //to aman
 
       axios.post('http://172.16.20.33:8080/search/register',
         {
@@ -180,17 +173,22 @@ export default {
 };
 </script>
 <style scoped>
+.parentregister{
+  width:40%;
+  margin:auto;
+}
+
 .inputfield{
   height:50px;
 }
 h1 {
   margin: 0 auto;
   background-color: #3B5998;
-  width: 48.3%;
+  width: 100%;
   color: white;
 }
 .register {
-  width: 38%;
+  width: 100%;
   margin: 0 auto;
   border: 2px solid black;
   padding: 5%;
