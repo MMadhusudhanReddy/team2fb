@@ -40,50 +40,64 @@
                         <i class="far fa-angry"></i>
                         Angry
                     </div>
-                    <div>
-                        <!-- <v-btn
-        color="primary"
-        dark
-        @click.stop="dialog = true"
-      >
-        Open Dialog
-      </v-btn>
-  
-      <v-dialog
-        v-model="dialog"
-        max-width="290"
-      >
-        <v-card>
-          <v-card-title class="headline">Use Google's location service?</v-card-title>
-  
-          <v-card-text>
-            Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
-          </v-card-text>
-  
-          <v-card-actions>
-            <v-spacer></v-spacer>
-  
-            <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-            >
-              Disagree
-            </v-btn>
-  
-            <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-            >
-              Agree
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
+
+
+
+                    <div  class="Comment">
+                        <div  class="container">
+                            <button  v-on:click.prevent="getcomments(index)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                Comment
+                            </button>
+                            <div class="modal fade" id="myModal" >
+                                <div class="modal-dialog modal-sm" style="width:50%;">
+                                    <div class="modal-content">
+
+
+                                        <div v-for="(comment,index1) in comments" :key="index1" class="order">
+                                            
+                                            <div  class="parentcomment">
+                                                <!-- <div class="comment">
+                                                    parentcommentid:  {{comment.parentid}}
+                                                </div> -->
+                                                <div class="comment">
+                                                    parenttext: {{comment.text}}
+                                                </div>
+                                                <button style="background-color: dodgerblue;font-size: 12px;"> reply </button>
+                                            </div>
+                            
+                                            <div class="orderlist">
+                                                <div v-for="(childcomment,commentindex) in comment.childComment" :key="commentindex" class="item">
+                                                    <div class="childcomment">
+                                                        <div class="commentchild">
+                                                            childcommentid: {{childcomment.commentid}}
+                                                        </div>
+                                                    <div class="commentchild">
+                                                        commenttext:{{childcomment.commenttext}} 
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+
+                    
+                                    <div class="modal-footer">
+                                        <input type="text" placeholder="start typing.." id="text" style="width:70%;"><br><br>
+                                        <button type="button" class="btn btn-secondary" style="width:20%;" data-dismiss="modal" @click="add">send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+
+
+
+
+
                 </div>
             </div>
+        </div>
         </div>
 
     </div>
@@ -116,14 +130,58 @@ export default {
                     "video":null
                 },
                 
+            ],
+
+
+
+
+            comments1:[
+                {
+                    parentid:1,
+                    text:"hello world",
+                    childcomments:[
+                        {
+                            commentid:11,
+                            commenttext:"hello mini world"
+                        },
+                        {
+                            commentid:12,
+                            commenttext:"this is fun"
+                        }
+                    ]
+                },
+                {
+                    parentid:2,
+                    text:"Welcome to fb!!!",
+                    childcomments:[
+                        {
+                            commentid:21,
+                            commenttext:"childcomment 21"
+
+                        },
+                        {
+                            commentid:22,
+                            commenttext:"childcomment 22"
+
+                        }
+
+                    ]
+                }
             ]
+
+
+
+
+
+
+
+
             
         }
     },
     created(){
         window.console.log("inside created of feedInTimeline")
       this.$store.dispatch("getFeedTimeline", this.$route.params.userId)
-      // this.$store.dispatch("/getFeeds/"+)
       
 
     },
@@ -132,10 +190,18 @@ export default {
         window.console.log("inside feedtimeline",this.$store.state.timelinefeeds)
         return this.$store.state.timelinefeeds
       },
+      comments(){
+          window.console.log("inside comments in feed in timeline")
+          window.console.log("comments",this.$store.state.comments)
+          return this.$store.state.comments
+      },
+      
+      
       
 
     },
     methods:{
+        
         postreaction(index){
         this.$store.state.postreaction="like"
         window.console.log("reaction",this.$store.state.postreaction)
@@ -166,6 +232,14 @@ export default {
         window.console.log(index)
         this.$store.state.index=index
         this.$store.dispatch('sendPostReaction')
+
+      },
+
+      getcomments(index){
+        window.console.log("inside get comments in feed timeline")
+        window.console.log(index)
+        this.$store.state.index=index
+        this.$store.dispatch('getCommentsForPost')
 
       }
       

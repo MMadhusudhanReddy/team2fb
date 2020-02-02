@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <div class="searchresults">
-            <MutualFriends/>
+            <MutualFriends1/>
         </div>
     </div>
 </template>
@@ -11,11 +11,11 @@
 <script>
 
 import Header from '../components/Header.vue'
-import MutualFriends from '../components/MutualFriends.vue'
+import MutualFriends1 from '../components/MutualFriends1.vue'
 export default {
     components:{
         Header,
-        MutualFriends
+        MutualFriends1
     },
     
 

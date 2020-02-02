@@ -1,5 +1,78 @@
 <template>
-<!-- SEND TO PARAS -->
+<!-- <div class="login-form">
+    <div id="facebook-title">
+      <h1>Facebook</h1>
+    </div>
+    <form >
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input
+            v-model="Username"
+            type="text"
+            class="form-control"
+            name="username"
+            placeholder="Username"
+            required="required"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-lock"></i>
+          </span>
+          <input
+            v-model="Password"
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Password"
+            required="required"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary login-btn btn-block" v-on:click="login" >Sign in</button>
+      </div>
+    </form>
+    <p class="text-center text-muted small signup">
+      Don't have an account?
+      <a v-on:click="register"  href="#">Sign up here!</a>
+    </p>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="fbloginclass">
   <h1>LOGIN</h1>
   <div class="login">
@@ -16,12 +89,12 @@
         <button v-on:click.prevent="login">LOGIN</button>
         <button v-on:click="register">Register</button>
      </div>
-     <!-- <a href="#">
-       <router-link to="/Register">REGISTER</router-link></a> -->
+     
    </form>
   </div>
 </div>
 </template>
+
 <script>
 
 import axios from "axios";
@@ -145,6 +218,56 @@ export default {
 }
 </script>
 <style scoped>
+/* 
+#facebook-title {
+  color: #3b5998;
+  font-weight: bolder;
+}
+
+.login-form {
+  width: 385px;
+  margin: 30px auto;
+}
+.login-form form {
+  margin-bottom: 15px;
+  background: #f7f7f7;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+}
+.login-form h2 {
+  margin: 0 0 15px;
+}
+.form-control,
+.login-btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+.input-group-addon .fa {
+  font-size: 23px;
+  margin-right: 10px;
+}
+.login-btn {
+  font-size: 15px;
+  font-weight: bold;
+  background: #3b5998;
+  border: none;
+}
+.white {
+  color: white;
+}
+
+ */
+
+
+
+
+
+
+
+
+
+
+
 .fbloginclass{
   width:40%;
   margin:auto;
@@ -183,5 +306,5 @@ button{
 }
 label{
   padding:30px;
-}
+} 
 </style>

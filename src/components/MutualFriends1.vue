@@ -62,10 +62,10 @@ export default {
       ]
     }
   },
-  created(){
-    this.$store.dispatch("getFriends",this.$route.params.userId)
+//   created(){
+//     this.$store.dispatch("getFriends",this.$route.params.userId)
 
-  },
+//   },
   computed:{
       friends(){
           return this.$store.state.searchdetails

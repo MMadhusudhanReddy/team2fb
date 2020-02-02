@@ -12,6 +12,7 @@ import Friends from '../views/Friends.vue'
 import FriendTimeline from '../views/FriendTimeline.vue'
 import commenttry from '../views/commenttry.vue'
 import BusinessPages from '../views/Business/BusinessPages.vue'
+import BusinessTimeline from '../views/BusinessTimeline.vue'
 
 
 Vue.use(VueRouter)
@@ -81,6 +82,11 @@ const routes = [
     path: '/businesspages',
     name: 'Business Pages',
     component: BusinessPages
+  },
+  {
+    path: '/businesstimeline',
+    name: 'Business Timeline',
+    component: BusinessTimeline
   },
   
 ]

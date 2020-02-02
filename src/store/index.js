@@ -14,13 +14,18 @@ export default new Vuex.Store({
     postreaction:null,
     feed:[],
     timelinefeeds:[],
-    index:null,
+    index: 1,
     friends:[],
     ads:[],
-    uploadtext:null
+    uploadtext:null,
+    comments:[]
 
   },
   mutations: {
+    UPDATE_COMMENT_DETAILS(state,data)
+    {
+      state.comments=data
+    },
     UPDATE_ADS(state,data)
     {
       state.ads=data
@@ -54,10 +59,11 @@ export default new Vuex.Store({
   actions: {
     addfriendrequest(friendid)
     {
-      axios.post('http://172.16.20.180:8082/user/addFriendRequest',
+      window.console.log("friend id",friendid)
+      axios.post('http://172.16.20.180:8082/user/sendFriendRequest',
       {
         userId:localStorage.getItem('userId'),
-        friendId :friendid
+        friendId :localStorage.getItem('friendId')
 
       })
       .then(response => {
@@ -113,15 +119,37 @@ export default new Vuex.Store({
     },
     getFeeds(context, userId) {
       window.console.log('in store, feeds ')
-      axios.get('http://172.16.20.113:8084/feed/getFeed/' + userId)
+      axios.get('http://172.16.20.113:8084/feed/createFeed/' + userId)
         .then(product => {
           window.console.log(product.data)
-          context.commit('UPDATE_FEED_DETAILS', product.data.postUserDTOList)
+          context.commit('UPDATE_FEED_DETAILS', product.data)
         })
         .catch(error => {
           window.console.log(error)
         })
     },
+
+
+    getCommentsForPost(context){
+      window.console.log("inside get comments in store")
+      window.console.log("index",this.state.index)
+      window.console.log('post details',this.state.timelinefeeds[this.state.index])
+      window.console.log('postid',this.state.timelinefeeds[this.state.index].postId)
+      axios.get('http://172.16.20.82:8083/comment/viewCommentByPost/' + this.state.timelinefeeds[this.state.index].postId)
+        .then(product => {
+          window.console.log(product.data)
+          context.commit('UPDATE_COMMENT_DETAILS', product.data.data)
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
+      
+
+    },
+
+
+
+
     sendPostReaction(){
       window.console.log("inside send post reaction in store")
       window.console.log("index",this.state.index)
@@ -187,7 +215,7 @@ export default new Vuex.Store({
 
       }).then(response => {
         window.console.log(response)
-        window.console.log('after axios postid',this.state.feed[this.state.index].postId)
+        window.console.log('after axios postid',this.state.feed[this.state.index].postDTO.postId)
         // context.commit('UPDATE_SEARCH_DETAILS', product.data)
       })
       .catch(error => {

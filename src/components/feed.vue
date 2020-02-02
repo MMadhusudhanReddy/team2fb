@@ -3,8 +3,8 @@
         <div v-for="(order,index) in feeds" v-bind:key="index">
             <div class="singlepost">
                 <div class="topsection">
-                          <img v-bind:src="order.imageurl" style="width:50px;border-radius:50%;" >
-                          <div style="padding: 2%;5"> {{order.username}} </div>
+                          <img v-bind:src="order.imageUrl" style="width:50px;border-radius:50%;" >
+                          <div style="padding: 2%;5"> {{order.userName}} </div>
                 </div>
                 <div v-if="order.postDTO.content.image!=null">
                     <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
