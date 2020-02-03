@@ -2,104 +2,108 @@
     <div class="parentfeed">
         <div v-for="(order,index) in feeds" v-bind:key="index">
             <div class="singlepost">
-                <!-- {{index}} -->
-                <!-- {{order.content.text}} -->
                 <div class="topsection">
-                    <img v-bind:src="order.imageurl" style="width:50px;border-radius:50%;" >
-                    <div style="padding: 2%;float:left;"> {{order.userName}} </div>
+                    <img v-bind:src="order.imageUrl" style="width:50px;border-radius:50%;" />
+                <div style="padding: 2%;float:left;">
+                    {{order.userName}}
                 </div>
-                <div v-if="order.postDTO.content.image!=null">
-                    <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;"><br>
+            
+                <div class="textContent" v-if="order.postDTO.content.text!=null">
+                    <div style="width:100%">
+                        <p style="width:100%">{{order.postDTO.content.text}}</p>
+                    </div>
                 </div>
-                <div v-if="order.postDTO.content.video!=null">
+                <div class="content" v-if="order.postDTO.content.image!=null">
+                    <img v-bind:src="order.postDTO.content.image" style="width:100%;height:280px;" /><br />
+                </div>
+                <div class="content" v-if="order.postDTO.content.video!=null">
                     <video style="width:100%;" autoplay>
-                        <source v-bind:src="order.postDTO.content.video" type="video/mp4">
-                        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-                        This video is not supported by the browser
-                    </video> 
+                        <source v-bind:src="order.postDTO.content.video" type="video/mp4" />
+                        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />This video is not supported by the browser
+                    </video>
                 </div>
-                <div v-if="order.postDTO.content.text!=null">
-                  <div style="width:100%">
-                    <p style="width:100%">{{order.postDTO.content.text}}   </p>  
-                  </div>
+                <div class="reactionList">
+                    <p>Reaction Lists</p>
                 </div>
                 <div class="bottomsection">
-                    <div v-on:click="postreaction(index)" >
+                    <div v-on:click="postreaction(index)">
                         <i class="far fa-thumbs-up"></i>
                         Like
                     </div>
-                    <div v-on:click="postreaction1(index)" >
+                    <div v-on:click="postreaction1(index)">
                         <i class="far fa-thumbs-down"></i>
                         Dislike
                     </div>
-                    <div v-on:click="postreaction2(index)" >
+                    <div v-on:click="postreaction2(index)">
                         <i class="far fa-surprise"></i>
                         wow
                     </div>
-                    <div v-on:click="postreaction3(index)" >
+                    <div v-on:click="postreaction3(index)">
                         <i class="far fa-angry"></i>
                         Angry
                     </div>
+                    <div v-on:click="postreaction3(index)">
+
+                    </div>
 
 
 
-                    <div  class="Comment">
-                        <div  class="container">
-                            <button  v-on:click.prevent="getcomments(index)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+
+
+
+                    <div class="Comment">
+                        <div class="container">
+                            <button v-on:click="commentsvisible(index)" type="button">
                                 Comment
                             </button>
-                            <div class="modal fade" id="myModal" >
-                                <div class="modal-dialog modal-sm" style="width:50%;">
-                                    <div class="modal-content">
 
-
-                                        <div v-for="(comment,index1) in comments" :key="index1" class="order">
-                                            
-                                            <div  class="parentcomment">
-                                                <!-- <div class="comment">
-                                                    parentcommentid:  {{comment.parentid}}
-                                                </div> -->
-                                                <div class="comment">
-                                                    parenttext: {{comment.text}}
-                                                </div>
-                                                <button style="background-color: dodgerblue;font-size: 12px;"> reply </button>
-                                            </div>
-                            
-                                            <div class="orderlist">
-                                                <div v-for="(childcomment,commentindex) in comment.childComment" :key="commentindex" class="item">
-                                                    <div class="childcomment">
-                                                        <div class="commentchild">
-                                                            childcommentid: {{childcomment.commentid}}
-                                                        </div>
-                                                    <div class="commentchild">
-                                                        commenttext:{{childcomment.commenttext}} 
-                                                    </div>
-                                                </div>
-                                            </div> 
+                            <div v-if="seen" >
+                                <div v-for="(comment,index1) in comments" :key="index1" class="order">
+                                                        
+                        
+                                    <div class="comment">
+                                        {{comment.text}}
+                                    </div>
+                                    <button style="background-color: dodgerblue;font-size: 12px;"> reply </button>
+                                                        
+                                        
+                                                    
+                                    <div v-for="(childcomment,commentindex) in comment.childComment" :key="commentindex" class="item">
+                                                
+                                                                    
+                                        <div class="commentchild">
+                                            {{childcomment.text}} 
                                         </div>
                                     </div>
-
-
-                    
-                                    <div class="modal-footer">
-                                        <input type="text" placeholder="start typing.." id="text" style="width:70%;"><br><br>
-                                        <button type="button" class="btn btn-secondary" style="width:20%;" data-dismiss="modal" @click="add">send</button>
-                                    </div>
+                                                        
+                                                    
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                    
-
-
-
-
-
                 </div>
             </div>
-        </div>
-        </div>
+                                    
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+                
+            
+            </div>
+        </div>
     </div>
 </template>
 
@@ -112,6 +116,7 @@ export default {
     },
     data :function(){
         return {
+            seen:false,
             orders:[
                 {
                         "text" : null ,
@@ -201,6 +206,14 @@ export default {
 
     },
     methods:{
+    commentsvisible(index){
+       window.console.log("inside get comments in feed")
+        window.console.log(index)
+        this.$store.state.index=index
+      this.$store.dispatch('getCommentsForPost1')
+       this.seen=true;
+
+     },
         
         postreaction(index){
         this.$store.state.postreaction="like"
@@ -235,26 +248,75 @@ export default {
 
       },
 
-      getcomments(index){
-        window.console.log("inside get comments in feed timeline")
-        window.console.log(index)
-        this.$store.state.index=index
-        this.$store.dispatch('getCommentsForPost')
-
-      }
+     
       
     }
 }
 </script>
 
 <style scoped>
-.singlepost{
+
+.singlepost {
+  width: 90%;
+  margin: auto;
+  background-color: white;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  /* padding-top:1%; */
+}
+.bottomsection {
+  margin-left: 2%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 2%;
+  padding-bottom: 10px;
+}
+.parentfeed {
+  background-color: whitesmoke;
+  width: 100%;
+}
+.textContent {
+  padding: 10px;
+  text-align: left;
+}
+.content {
+  border: 1px solid whitesmoke;
+  margin-bottom: 15px;
+}
+.reactionList {
+  margin: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+  border-bottom: 1px solid whitesmoke;
+}
+p {
+  margin-bottom: 0px;
+}
+.commentchild{
+    font: italic;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .singlepost{
     width:90%;
     margin:auto;
     background-color: #F7F0F0;
     margin-bottom: 2%;
     margin-top: 2%;
-    /* padding-top:1%; */
+    
 }
 .bottomsection{
     margin-left: 3%;
@@ -264,6 +326,6 @@ export default {
 }
 .parentfeed{
   width:100%;
-}
+} */
 
 </style>

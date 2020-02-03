@@ -1,5 +1,62 @@
 <template>
-    <div>
+
+ <div class="landing-main">
+    <Header />
+    <div class="mainbox">
+      <!-- <div class="sidebar">
+        <sidebar />
+      </div> -->
+      <div class="Myprofile">
+        <div id="profile-pic">
+          <img :src="getuserdetails.imageUrl" alt="img" />
+        </div>
+        <div class="fields">
+          <strong>Name</strong>
+          <p>{{ getuserdetails.userName }}</p>
+        </div>
+        <div class="fields">
+          <strong>Domains Interested</strong>
+          <p>{{ getuserdetails.interests[0] }}</p>
+        </div>
+        <div class="fields">
+          <strong>E-mail</strong>
+          <p>{{getuserdetails.email}}</p>
+        </div>
+        <div class="fields">
+          <strong>Gender</strong>
+          <p>{{getuserdetails.gender}}</p>
+        </div>
+        <div class="fields">
+          <strong>Mobile Number</strong>
+          <p>{{getuserdetails.mobileNumber}}</p>
+        </div>
+        <div class="fields">
+          <strong>Profile Type</strong>
+          <p>{{getuserdetails.displayType}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="landing-main">
         <Header/>
         <div class="mainbox">
 
@@ -44,15 +101,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 <script>
 import Header from '../components/Header.vue'
-import sidebar from '../components/sidebar.vue'
+// import sidebar from '../components/sidebar.vue'
 export default {
     components:{
         Header,
-        sidebar
+        // sidebar
     },
     data(){
         return{
@@ -78,6 +135,90 @@ export default {
 }
 </script>
 <style scoped>
+.landing-main
+{
+    background-color:whitesmoke;
+    height: 100vh;
+}
+#profile-pic img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 40px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 6px 3px gray;
+}
+.fields {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 35px;
+}
+.Myprofile {
+  width: 40%;
+  padding: 2%;
+  font-family: sans-serif;
+  margin-left: 10%;
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin: auto auto;
+  
+}
+label {
+  float: left;
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+input,
+select,
+span {
+  height: 30px;
+  float: right;
+  width: 250px;
+  margin-right: 30px;
+  border: none;
+}
+.editable {
+  background-color: white;
+}
+.sidebar {
+  background-color: white;
+  width: 25%;
+  margin: 15px;
+}
+.mainbox {
+  display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.landing-main
+{
+    background-color:whitesmoke;
+}
 .fields{
   height:50px;
 }
@@ -107,18 +248,12 @@ img{
 .editable{
     background-color: #FFFFE6;
 }
-.sidebar{
-    background-color: #BFDBF7;
-    width: 20%;
-    /* padding-left:1.5%;
-    padding-right: 1.5%; */
-    margin-right:1%;    
-    padding-left: 38px;
-    padding-right: 0px;
-
-
+.sidebar {
+  background-color: white;
+  width: 25%;
+  margin: 15px;
 }
 .mainbox{
     display: flex;
-}
+} */
 </style>

@@ -115,6 +115,7 @@ export default new Vuex.Store({
     },
     getBusinessFeedTimeline(context,userId)
     {
+      window.console.log("inside get business feeds in store and userid is",userId)
       axios.get('http://172.16.20.82:8083/post/admin/timeline/' + userId)
         .then(product => {
           window.console.log("inside get feed timeline",product.data.data)
@@ -141,8 +142,8 @@ export default new Vuex.Store({
       window.console.log('in store, feeds ')
       axios.get('http://172.16.20.113:8084/feed/createFeed/' + userId)
         .then(product => {
-          window.console.log(product.data)
-          context.commit('UPDATE_FEED_DETAILS', product.data)
+          window.console.log(product.data.data)
+          context.commit('UPDATE_FEED_DETAILS', product.data.data)
         })
         .catch(error => {
           window.console.log(error)
@@ -151,6 +152,23 @@ export default new Vuex.Store({
 
 
     getCommentsForPost(context){
+      window.console.log("inside get comments in store")
+      window.console.log("index",this.state.index)
+      window.console.log('post details',this.state.feed[this.state.index])
+      window.console.log('postid',this.state.feed[this.state.index].postDTO.postId)
+      axios.get('http://172.16.20.82:8083/comment/viewCommentByPost/' + this.state.feed[this.state.index].postDTO.postId)
+        .then(product => {
+          window.console.log(product.data)
+          context.commit('UPDATE_COMMENT_DETAILS', product.data.data)
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
+      
+
+    },
+
+    getCommentsForPost1(context){
       window.console.log("inside get comments in store")
       window.console.log("index",this.state.index)
       window.console.log('post details',this.state.timelinefeeds[this.state.index])
@@ -224,12 +242,12 @@ export default new Vuex.Store({
       window.console.log("inside send post reaction in store")
       window.console.log("index",this.state.index)
       window.console.log('post details',this.state.feed[this.state.index])
-      window.console.log('postid',this.state.feed[this.state.index].postId)
+      window.console.log('postid',this.state.feed[this.state.index].postDTO.postId)
       axios.post('http://172.16.20.82:8083/reaction/addActivity',
       {
         // "userId":1,
         userId:localStorage.getItem('userId'),
-        postId:this.state.feed[this.state.index].postId,
+        postId:this.state.feed[this.state.index].postDTO.postId,
         activity:this.state.postreaction
 
 

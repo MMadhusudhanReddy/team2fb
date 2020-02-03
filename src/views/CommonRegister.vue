@@ -44,7 +44,7 @@ export default {
           if(this.username!=null && this.email!=null &&this.password!=null)
           {
               window.console.log("inside register")
-                axios.post('http://172.16.20.32:8080/auth/signup',{
+                axios.post('http://172.16.20.32:8080/authentication/auth/signup',{
                 name:this.username,
                 email :this.email,
                 password:this.password

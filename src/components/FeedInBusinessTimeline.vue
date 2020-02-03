@@ -81,10 +81,7 @@
 
 
                     
-                                    <div class="modal-footer">
-                                        <input type="text" placeholder="start typing.." id="text" style="width:70%;"><br><br>
-                                        <button type="button" class="btn btn-secondary" style="width:20%;" data-dismiss="modal" @click="add">send</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -181,7 +178,7 @@ export default {
     },
     created(){
         window.console.log("inside created of business feedInTimeline")
-      this.$store.dispatch("getBusinessFeedTimeline", this.$route.params.userId)
+        this.$store.dispatch("getBusinessFeedTimeline", this.$route.params.userId)
       
 
     },

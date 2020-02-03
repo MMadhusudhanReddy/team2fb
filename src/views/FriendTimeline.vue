@@ -1,22 +1,27 @@
 <template>
     <div>
         <Header/>
-        
-        
-        <div>
-            <FriendTimelineBio/>
-        </div>
-        <div class="flexcomponent">
+        <div class="parentbox">
+
             <div class="sidebar">
                     <sidebar/>
             </div>
-            <div class="feeds">
+        
+            <div class="middlesection">
+                <div class="childmiddlesection" >
+                    <FriendTimelineBio/>
+                </div>
+                <div class="childmiddlesection">
                     <FeedInTimeline/>
+                </div>
             </div>
+            
+            
             <div class="ads">
                 <MutualFriends/>
             </div>
         </div>
+       
     </div>
 </template>
 
@@ -47,6 +52,7 @@ export default {
 </script>
 
 <style scoped>
+
 .feeds{
     background-color: #BFDBF7;
     width:50%;
@@ -54,18 +60,25 @@ export default {
     display: flex;
 }
 .sidebar{
-    background-color: #BFDBF7;
+  background-color: white;
+  width: 25%;
+  margin: 15px;
+
+
+
+
+
+
+    /* background-color: #BFDBF7;
     width: 20%;
-    /* padding-left:1.5%;
-    padding-right: 1.5%; */
     margin-right:1%;    
     padding-left: 38px;
-    padding-right: 0px;
+    padding-right: 0px; */
 
 
 }
 .ads{
-    background-color: #BFDBF7;
+    background-color: white;
     width: 28%;
     padding-left: 1%;
     padding-right: 1%;
@@ -75,5 +88,19 @@ export default {
 
 .flexcomponent{
     display:flex;
+}
+
+.middlesection{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+}
+.parentbox{
+    display: flex;
+    flex-direction: row;
+}
+childmiddlesection{
+    width: 100%;
 }
 </style>

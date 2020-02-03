@@ -1,18 +1,17 @@
 <template>
     <div class="Timelinebio">
       <div class="left">
-          <img :src="bio.imageUrl"  alt="image" height="150" width="150">
-          <!-- <img :src="image"  alt="image" height="150" width="150"> -->
+          <!-- <img :src="bio.imageUrl"  alt="image" height="150" width="150"> -->
+          <img class="image" :src="image"  alt="image">
       </div>
       <div class="right">
-          <!-- <p>NAME : {{bio.userName}}</p>
-          <p>DOB:{{DOB}}</p> -->
+           <!-- <p>NAME : {{bio.user}}</p> -->
+          <!-- <p>DOB:{{DOB}}</p> -->
           <p> {{bio.userName}} </p>
       </div>
       <div  class="addfriend">
-          <div v-if="seen" v-on:click="addfriend"> Add Friend </div>
+          <button class="btn" v-if="seen" v-on:click="addfriend"> Add Friend </button>
           <p v-else> Following </p>
-
       </div>
     
     </div>
@@ -44,37 +43,59 @@ export default {
 </script>
 <style scoped>
 .Timelinebio{
-    box-shadow: 4px 3px 2px 3px  black;
     height:150px;
-    width:100%;
+    margin: auto;
     margin-bottom: 1%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid lightgrey;
 }
 .left{
-    float:left;
-    width:20%;
+    padding: 0px 10px;
+    float: left;
+    width: 30%;
 }
 img{
     border-radius:50%;
 }
 .right{
-    float:left;
-    width:60%;
-    font-weight:bold;
-    font-size:20px;
+   float: left;
+    width: 30%;
+    font-weight: bold;
+    font-size: 20px;
+    margin: auto auto;
 }
 
 .addfriend{
-    margin:1%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    color:blue;
-    /* height: 100%; */
-    /* background-color: #42a2e6;
-    color: #131212fa;
-    /* width: fit-content; */
-    /* padding: 1%; */
-    /*float: right;
-    border-radius: 50px; */
+    float: right; 
+    display: flex;
+    flex-direction: column-reverse;
+    width: 30%;
+    
 }
+
+.btn
+{
+    background-color: #3b5998;
+    color: white;
+    width: 70%;
+    margin: auto auto;
+    border-radius: 50px;;
+}
+
+p
+{
+    margin-bottom: 0;
+}
+
+.image
+{
+    width: 90%;
+    height: 100%;
+
+}
+
+
+
 </style>

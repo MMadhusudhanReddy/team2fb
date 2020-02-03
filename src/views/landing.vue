@@ -1,15 +1,19 @@
 <template>
-    <div>
+    <div class="landing-main">
+        <div class="header-landing">
         <Header/>
-        <div class="createpost">
-            <CreatePost/>
         </div>
-        <div class="parentlanding">
+        <div class="landing-content flex">
             <div class="sidebar">
                 <sidebar/>
             </div>
-            <div class="feeds">
+            <div class="feeds flex-container createpost">
+                <div class="postbox">
+            <CreatePost />
+        </div>
+        <div>
                 <Feed/>
+            </div>
             </div>
             <div class="ads">
                 <Ads/>
@@ -38,7 +42,74 @@ export default {
 </script>
 
 <style scoped>
-.parentlanding{
+
+
+.landing-main
+{
+    background-color:whitesmoke;
+}
+.flex {
+  display: flex;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+.feeds {
+  background-color: #bfdbf7;
+  width: 50%;
+  display: flex;
+}
+.sidebar {
+  background-color: white;
+  width: 25%;
+  margin: 15px;
+}
+.ads {
+  background-color:white;
+  width: 25%;
+  margin: 15px;
+}
+.createpost {
+  background-color: white;
+  width: 50%;
+  margin: 15px;
+  /* width:50%; */
+}
+.postbox
+{
+    padding: 15px;
+    border-bottom: 15px solid whitesmoke;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .parentlanding{
     display: flex;
 }
 
@@ -51,8 +122,6 @@ export default {
 .sidebar{
     background-color: #BFDBF7;
     width: 23%;
-    /* padding-left:1.5%;
-    padding-right: 1.5%; */
     margin-right:1%;    
     padding-left: 38px;
     padding-right: 0px;
@@ -73,7 +142,7 @@ export default {
     margin: auto;
     margin-bottom: 1%;
     margin-left: 24%;
-    /* width:50%; */
-}
+    
+} */
 
 </style>

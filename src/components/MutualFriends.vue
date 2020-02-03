@@ -1,25 +1,21 @@
 <template>
   <div class="Friends">
       <div class="mutualfriendsheading">Friends
-        <div v-for="(items,index) in friends" :key="index">
-            <div v-on:click="search(index)"  style="display:flex;flex-direction:row;border:1px solid black;justify-content:space-between;padding:5%;">
+        <div v-for="(items) in friends" :key="items">
+            <div class="friendList">
                 <div>
                     <img v-bind:src="items.imageUrl" class="image" />
-
                 </div>
-                <div>
+                <div class="data">
                     {{items.userName}}
-
+                    <button class="dataButton">Following</button>
                 </div>
             </div>
-        
-      
             </div>
         </div>
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
@@ -63,81 +59,30 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch("getFriends",this.$route.params.userId)
-
+    this.$store.dispatch("getFriends",localStorage.getItem('userId'))
   },
   computed:{
       friends(){
           return this.$store.state.searchdetails
       }
-
   },
   methods:{
-    search(index){
-        window.console.log("search details",this.$store.state.searchdetails)
-        window.console.log('index',index)
-        window.console.log('user id in search method',this.$store.state.searchdetails[index].userId)
-        window.console.log('user id from local storage ',localStorage.getItem('userId'))
+        search(index){
+        window.console.log(index)
         this.$store.state.index=index
-
-
-
-        //to aman for post reaction
-
-        axios.post('http://172.16.20.33:8080/search/save',
-              {
-                "targetId":this.$store.state.searchdetails[index].userId,
-                "action":"pageview",
-                "appId":"facebook",
-                "userId":localStorage.getItem('userId'),
-                "targetEntity":"profile",
-                "tag":"others"
-
-              },)
-              .then(response=>{
-                window.console.log('aman response',response)
-                // localStorage.setItem('userId',response.data.data.userId)
-                // this.$router.push('/landing/'+localStorage.getItem('userId')+"")
-                
-                
-              })
-
-            .catch(error => {
-              window.console.log(error)
-            })
-
-
-
-
-
-
-
-        if(this.$store.state.searchdetails[index].userId===localStorage.getItem('userId'))
-        {
-            this.$router.push('/timeline/'+localStorage.getItem('userId')+'')
-
-        }
-        else
-        {
-
-            localStorage.setItem('friendId',this.$store.state.searchdetails[this.$store.state.index].userId)
-
-            this.$router.push('/friendtimeline/'+this.$store.state.searchdetails[this.$store.state.index].userId+'')
-
-        }
-        
-
-    },
+        this.$router.push('/friendtimeline/'+this.$store.state.searchdetails[this.$store.state.index].userId)
+      },
 }
 }
 </script>
 <style scoped>
 .image
 {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   float:left;
+  margin: auto auto;
 }
 .Friends {
   font-family: sans-serif;
@@ -159,6 +104,25 @@ td{
     /* display:flex;
     justify-content:center;
     flex-direction:row; */
-    
+}
+.friendList
+{
+  display:flex;
+  flex-direction:row;
+  border:1px solid lightgrey;
+  justify-content:space-between;
+  padding:5%;
+  margin: auto auto;
+  border-radius: 20px;
+}
+.data
+{
+  margin: auto auto;
+}
+.dataButton
+{
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+  border-radius: 50px;
 }
 </style>

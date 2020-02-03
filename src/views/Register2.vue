@@ -142,7 +142,7 @@ export default {
         window.console.log("inside second register page")
       // window.console.log("fblogin  ",credentials)  
       //to paras
-        axios.post('http://172.16.20.32:8080/role/updateRole',
+        axios.post('http://172.16.20.32:8080/authentication/role/updateRole',
         {
           "channel_channel_id" :1,
           "role" : this.selected

@@ -123,7 +123,7 @@ export default {
       login(){
         window.console.log("inside login page")
       // window.console.log("fblogin  ",credentials)
-      axios.post('http://172.16.20.32:8080/auth/signin',{
+      axios.post('http://172.16.20.32:8080/authentication/auth/signin',{
         email :this.Username,
         password:this.Password,
       })
@@ -131,7 +131,7 @@ export default {
         window.console.log('response',response)
         window.console.log("inside second response")
         this.$store.state.accesstoken="Bearer "+response.data.accessToken
-        axios.post('http://172.16.20.32:8080/jwt/getUserDetails',
+        axios.post('http://172.16.20.32:8080/authentication/jwt/getUserDetails',
         {
           "provider": 1
 
