@@ -5,7 +5,7 @@
         <div class="flexcomponent">
             
             <div class="feeds">
-                    <FeedInTimeline/>
+                    <FeedInBusinessTimeline/>
             </div>
             
         </div>
@@ -15,17 +15,18 @@
 <script>
 
 import TimelineBio from '../components/TimelineBio.vue'
-import FeedInTimeline from '../components/FeedInTimeline.vue'
+import FeedInBusinessTimeline from '../components/FeedInBusinessTimeline.vue'
 import Header from '../components/Header.vue'
 
 export default {
     components:{
         TimelineBio,
-        FeedInTimeline,
+        FeedInBusinessTimeline,
         Header,
     },
     created(){
-      this.$store.dispatch("getFeedTimeline",localStorage.getItem('userId'))
+        window.console.log("inside created of business timeline page")
+    //   this.$store.dispatch("getFeedTimeline",localStorage.getItem('userId'))
       // this.$store.dispatch("/getFeeds/"+)
       
 
@@ -39,6 +40,7 @@ export default {
 .feeds{
     background-color: #BFDBF7;
     width:50%;
+    margin:auto;
     
     display: flex;
 }

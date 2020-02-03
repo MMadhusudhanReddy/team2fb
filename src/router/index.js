@@ -84,7 +84,7 @@ const routes = [
     component: BusinessPages
   },
   {
-    path: '/businesstimeline',
+    path: '/businesstimeline/:userId',
     name: 'Business Timeline',
     component: BusinessTimeline
   },

@@ -32,6 +32,19 @@ export default {
         return{
             category: "sports"
         }
+    },
+    created(){
+        window.console.log("inside created of business body")
+        
+
+    },
+    methods:{
+        createpage(){
+            this.$store.state.pageName=this.pageName
+            this.$store.state.category=this.category
+            this.$store.dispatch("businessCreatePage",localStorage.getItem('userId'))
+
+        }
     }
 }
 </script>

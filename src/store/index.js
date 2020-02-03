@@ -18,10 +18,18 @@ export default new Vuex.Store({
     friends:[],
     ads:[],
     uploadtext:null,
-    comments:[]
+    comments:[],
+    businessfeed:[],
+    pageName:null,
+    category:null
 
   },
   mutations: {
+    UPDATE_BUSINESS_TIMELINE_FEED_DETAILS(state,data)
+    {
+      state.businessfeed=data
+
+    },
     UPDATE_COMMENT_DETAILS(state,data)
     {
       state.comments=data
@@ -99,6 +107,18 @@ export default new Vuex.Store({
         .then(product => {
           window.console.log("inside get friends",product.data.data)
           context.commit('UPDATE_FRIENDS', product.data.data)
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
+
+    },
+    getBusinessFeedTimeline(context,userId)
+    {
+      axios.get('http://172.16.20.82:8083/post/admin/timeline/' + userId)
+        .then(product => {
+          window.console.log("inside get feed timeline",product.data.data)
+          context.commit('UPDATE_BUSINESS_TIMELINE_FEED_DETAILS', product.data.data)
         })
         .catch(error => {
           window.console.log(error)
@@ -251,6 +271,24 @@ export default new Vuex.Store({
 
 
 
+    },
+
+    businessCreatePage(userId) {
+      // window.console.log('in store, getproductdetails ', this.state)
+      axios.post('http://172.16.20.180:8082/user/getBusinessDetails/' + userId,
+      {
+        "businessName":this.state.pageName,
+        "category":this.category
+
+
+      })
+        .then(product => {
+          window.console.log(product.data)
+          
+        })
+        .catch(error => {
+          window.console.log(error)
+        })
     },
 
     getAboutDetails({ commit }, userId) {

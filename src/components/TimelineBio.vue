@@ -1,7 +1,7 @@
 <template>
     <div class="Timelinebio">
       <div class="left">
-          <img :src="bio.imageUrl"  alt="image" height="150" width="150">
+          <img :src="dp"  alt="image" height="150" width="150">
       </div>
       <div class="right">
           <!-- <p>NAME : {{localStorage.getItem('name') }}</p> -->
@@ -16,7 +16,8 @@ export default {
         image :'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2SYQzKh19n2C5VP1AkWYgk17RtmiilqMr_MEBSN9T85k3S77i',
         NAME :'KAMAL',
         DOB:'10/03/1998',
-        name:localStorage.getItem('name')
+        name:localStorage.getItem('name'),
+        dp:localStorage.getItem('dp')
         }
     },
     computed:{
